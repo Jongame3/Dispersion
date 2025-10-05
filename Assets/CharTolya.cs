@@ -22,7 +22,7 @@ public class CharTolya : MonoBehaviour, IBaseActions
 
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         

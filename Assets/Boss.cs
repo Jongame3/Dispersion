@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, IBaseActions
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int Hp = 10000;
+    CharPoison P;
+    public void Attack()
     {
-        
+        P.Hp = Hp - 10;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
