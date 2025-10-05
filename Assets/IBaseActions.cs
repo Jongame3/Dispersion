@@ -1,4 +1,4 @@
-public interface IBaseActions
-{   
-    public void Attack();
+public interface IBaseActions 
+{ 
+ public void Attack();
 }

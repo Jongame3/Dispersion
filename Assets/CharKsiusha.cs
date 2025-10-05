@@ -30,7 +30,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
         else
         {
-            // вывод на экран сообщения, недостаточно очков
+            // output that not enough SP
         }
     }
 
