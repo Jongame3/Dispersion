@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Krivero : MonoBehaviour, IBaseActions
+public class Tsumatsu : MonoBehaviour, IBaseActions
 {
     public int HP = 70;
     public int Defense = 30;
