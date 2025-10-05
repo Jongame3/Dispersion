@@ -11,7 +11,10 @@ public class CharTolya : MonoBehaviour, IBaseActions
     public int DespairPoint = 0;
 
     
-
+    public void Attack()
+    {
+        
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
