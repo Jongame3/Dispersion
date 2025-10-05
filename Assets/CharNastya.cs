@@ -1,16 +1,10 @@
 using UnityEngine;
 
-public class CharNastya : MonoBehaviour
+public class CharNastya : MonoBehaviour, IBaseActions
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Attack()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

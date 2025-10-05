@@ -1,16 +1,45 @@
 using UnityEngine;
 
-public class CharKsiusha : MonoBehaviour
+public class CharKsiusha : MonoBehaviour, IBaseActions
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int Hp = 40;
+    public uint Defense = 30;
+    public uint Speed = 80;
+    public int AttackPower = 50;
+    public int SkillPoint = 0;
+    public int MaxSkillPoint = 10;
+    bool evade = false;
+    bool attackBuffed = false;
+
+    private Boss Boss;
+
+    public void Attack()
     {
-        
+        Boss.Hp = Boss.Hp - AttackPower;
+        SkillPoint++;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Fangbite()
     {
-        
+        if (SkillPoint >= 2)
+        {
+            Boss.Hp -= AttackPower ;
+            Hp += 10;
+            SkillPoint -= 2;
+        }
+        else
+        {
+            // вывод на экран сообщения, недостаточно очков
+        }
+    }
+
+    public void StalkingPunch()
+    {
+        if (SkillPoint >= 3)
+        {
+            evade = true;
+            attackBuffed = true;
+        }
     }
 }
