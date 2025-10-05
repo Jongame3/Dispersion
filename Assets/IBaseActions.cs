@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class IBaseActions
+public interface IBaseActions
 {
     
 }
