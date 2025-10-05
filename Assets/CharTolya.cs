@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CharTolya : MonoBehaviour, IBaseActions
@@ -8,10 +9,6 @@ public class CharTolya : MonoBehaviour, IBaseActions
     public int Strength = 0;
     public int SkillPoint = 0;
     public int DespairPoint = 0;
-
-    using SP as SkillPoint;
-    using DP as DespairPoint;
-
 
     
 
