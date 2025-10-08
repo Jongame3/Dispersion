@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Krivero : MonoBehaviour, IBaseActions
+public class Krivero : MonoBehaviour, 
 {
     public int HP = 70;
     public int Defense = 30;
@@ -10,10 +10,10 @@ public class Krivero : MonoBehaviour, IBaseActions
     public int SkillPoint = 0;
     public int DespairPoint = 0;
 
+    private Boss Boss;
+
+
     
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
