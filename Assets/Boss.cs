@@ -3,10 +3,16 @@ using UnityEngine;
 public class Boss : MonoBehaviour, IBaseActions
 {
     public int Hp = 10000;
-    CharPoison P;
+    [SerializeField] private CharKsiusha fox;
+    [SerializeField] private CharPoison yad;
+    [SerializeField] private CharNastya fireg;
+    [SerializeField] private Tsumatsu jirai ;
+
+    
     public void Attack()
     {
-        P.Hp = Hp - 10;
+        fox.Hp = Hp - 10;
+        
     }
 
 }
