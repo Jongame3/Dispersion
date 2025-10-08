@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Krivero : MonoBehaviour, 
+public class Tsumatsu : MonoBehaviour, IBaseActions
 {
     public int HP = 70;
     public int Defense = 30;
@@ -14,6 +14,13 @@ public class Krivero : MonoBehaviour,
 
 
     
+    
+    public void Attack()
+    {
+        
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
