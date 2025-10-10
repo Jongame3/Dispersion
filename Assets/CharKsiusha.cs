@@ -3,6 +3,7 @@ using UnityEngine;
 public class CharKsiusha : MonoBehaviour, IBaseActions
 {
     public int Hp = 40;
+    public int maxHp = 40;
     public uint Defense = 30;
     public uint Speed = 80;
     public int AttackPower = 50;

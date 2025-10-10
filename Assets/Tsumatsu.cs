@@ -3,24 +3,26 @@ using UnityEngine;
 
 public class Tsumatsu : MonoBehaviour, IBaseActions
 {
-    public int HP = 70;
+    public int Hp = 70;
+    public int maxHp = 70;
     public int Defense = 30;
     public int Speed = 100;
-    public int Strength = 0;
+    public int AttackPower = 0;
     public int SkillPoint = 0;
+    public int MaxSkillPoint = 10;
     public int DespairPoint = 0;
+    public int maxDespairPoint = 5;
 
-    private Boss Boss;
+    [SerializeField] private Boss Boss;
+    [SerializeField] private CharKsiusha K;
+    [SerializeField] private CharNastya N;
+    [SerializeField] private CharPoison P;
 
-
-    
-    
     public void Attack()
     {
         
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
