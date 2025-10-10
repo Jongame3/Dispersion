@@ -6,6 +6,9 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public int maxHp = 100;
     public int Speed = 60;
     public const int MaxHp = 100;
+    public int AttackPower;
+
+    public int revivePoint = 0;
 
     public void Attack()
     {

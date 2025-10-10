@@ -1,5 +1,5 @@
 public interface IBaseActions 
 { 
- public void Attack();
+    public void Attack();
 
 }

@@ -12,6 +12,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     bool evade = false;
     bool attackBuffed = false;
 
+    public int revivePoint = 0;
+
     [SerializeField] private Boss Boss;
 
     public void Attack()
