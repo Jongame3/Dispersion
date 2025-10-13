@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class Tsumatsu : MonoBehaviour, IBaseActions
 {
@@ -26,7 +27,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool ignore)
     {
 
     }

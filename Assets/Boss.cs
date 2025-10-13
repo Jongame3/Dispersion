@@ -1,10 +1,13 @@
 using UnityEngine;
+using System.Collections;
+using System;
 
 public class Boss : MonoBehaviour, IBaseActions
 {
     public int Hp = 10000;
     public int maxHp = 10000;
     public int AttackPower = 10;
+    public int Defense = 20;
     [SerializeField] private CharKsiusha fox;
     [SerializeField] private CharPoison yad;
     [SerializeField] private CharNastya fireg;
@@ -17,10 +20,17 @@ public class Boss : MonoBehaviour, IBaseActions
         
     }
 
-    public void TakeDamage (int damage)
+    public void TakeDamage(int damage, bool ignore)
     {
-        Hp -= damage;
         
+        if (ignore == false)
+        {
+            Hp -= (damage * (1 - Defense / 100));
+        }
+        else {
+            Hp -= damage;
+        }
+
         if (Hp < 0)
         {
             //WIN

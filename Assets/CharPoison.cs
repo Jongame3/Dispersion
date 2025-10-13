@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System;
 
 public class CharPoison : MonoBehaviour, IBaseActions
 {
@@ -14,7 +16,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
 
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool ignore)
     {
 
     }
