@@ -34,11 +34,17 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
 
         Hp -= (damage * (1 - Defense/100));
-        if (Hp < 0 && revivePoint < 1) { Hp = 20; }
+        if (Hp < 0 && revivePoint >= 1) { Hp = 20; }
         else if (Hp < 0) 
         {
             Alive = false;
         }
+    }
+
+    public void Def()
+    {
+        BuffDEF(2, 1.5f);
+        SkillPoint++;
     }
 
     private IEnumerator BuffATK(uint rounds, float multiplier)
