@@ -26,7 +26,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         
     }
 
-    public void Attack(MonoBehaviour target)
+    public void TakeDamage(int damage)
     {
 
     }

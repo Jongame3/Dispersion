@@ -18,4 +18,8 @@ public class CharNastya : MonoBehaviour, IBaseActions
 
     }
 
+    public void TakeDamage(int damage)
+    {
+
+    }
 }

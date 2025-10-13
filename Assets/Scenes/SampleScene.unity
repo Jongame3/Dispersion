@@ -156,7 +156,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -189, y: 0}
-  m_SizeDelta: {x: 300, y: 66.8618}
+  m_SizeDelta: {x: 300, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &95130439
 MonoBehaviour:
@@ -467,11 +467,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharKsiusha
   Hp: 40
+  maxHp: 40
   Defense: 30
   Speed: 80
   AttackPower: 50
   SkillPoint: 0
   MaxSkillPoint: 10
+  revivePoint: 0
   Boss: {fileID: 1165730502}
 --- !u!1 &185813620
 GameObject:
@@ -510,7 +512,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 189, y: 140.00002}
-  m_SizeDelta: {x: 300, y: 66.8618}
+  m_SizeDelta: {x: 300, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &185813622
 MonoBehaviour:
@@ -682,12 +684,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fccabbcfc1deb428a03aa24010a722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tsumatsu
-  HP: 70
+  Hp: 70
+  maxHp: 70
   Defense: 30
   Speed: 100
-  Strength: 0
+  AttackPower: 0
   SkillPoint: 0
+  MaxSkillPoint: 10
   DespairPoint: 0
+  maxDespairPoint: 5
+  revivePoint: 0
+  changedToSweetLie: 0
+  Boss: {fileID: 0}
+  K: {fileID: 0}
+  N: {fileID: 0}
+  P: {fileID: 0}
 --- !u!1 &466230557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +1011,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -189, y: -59}
-  m_SizeDelta: {x: 300, y: 66.8618}
+  m_SizeDelta: {x: 300, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &830438888
 MonoBehaviour:
@@ -1612,7 +1623,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 189, y: -59}
-  m_SizeDelta: {x: 300, y: 66.8618}
+  m_SizeDelta: {x: 300, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160744534
 MonoBehaviour:
@@ -1732,7 +1743,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 316}
-  m_SizeDelta: {x: 379.5837, y: 379.5837}
+  m_SizeDelta: {x: 380, y: 380}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1165730502
 MonoBehaviour:
@@ -1747,6 +1758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
   Hp: 10000
+  maxHp: 10000
   fox: {fileID: 0}
   yad: {fileID: 0}
   fireg: {fileID: 0}
@@ -2035,7 +2047,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharPoison
   Hp: 100
+  maxHp: 100
   Speed: 60
+  AttackPower: 0
+  revivePoint: 0
 --- !u!1 &1658996676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,7 +2088,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 189, y: 59}
-  m_SizeDelta: {x: 300, y: 66.8618}
+  m_SizeDelta: {x: 300, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1658996678
 MonoBehaviour:
@@ -2194,7 +2209,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -189, y: 59}
-  m_SizeDelta: {x: 300, y: 66.8618}
+  m_SizeDelta: {x: 300, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705472925
 MonoBehaviour:
@@ -2366,6 +2381,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414cc6e75697a0b43b452e11e07598bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharNastya
+  Hp: 0
+  maxHp: 0
+  Defense: 0
+  Speed: 0
+  AttackPower: 0
+  SkillPoint: 0
+  MaxSkillPoint: 0
+  revivePoint: 0
 --- !u!1 &1849876723
 GameObject:
   m_ObjectHideFlags: 0
