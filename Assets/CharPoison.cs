@@ -16,6 +16,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
     bool Alive = true;
 
     [SerializeField] private Boss Boss;
+    [SerializeField] private Tsumatsu jirai;
 
 
     public void Attack()
@@ -40,6 +41,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
         }
 
         Hp -= (damage * (1 - Defense / 100));
+        jirai.DespairPoint++;
         if (Hp <= 0 && revivePoint >= 1) { Hp = 20; }
         else if (Hp <= 0)
         {
