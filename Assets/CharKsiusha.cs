@@ -34,7 +34,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
 
         Hp -= (damage * (1 - Defense/100));
-        if (Hp < 0 && revivePoint >= 1) { Hp = 20; }
+        if (Hp <= 0 && revivePoint > 0) { Hp = maxHp/2; }
         else if (Hp < 0) 
         {
             Alive = false;
@@ -43,7 +43,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
     public void Def()
     {
-        BuffDEF(2, 1.5f);
+        BuffDEF(1, 1.5f);
         SkillPoint++;
     }
 
@@ -53,7 +53,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
         AttackPower = (int)(AttackPower * multiplier);
 
-        yield return new WaitUntil(() => (rounds + buffStart == GameData.RoundCount));
+        yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
         AttackPower = 50;
     }
@@ -64,12 +64,10 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
         Defense = (int)(Defense * multiplier);
 
-        yield return new WaitUntil(() => (rounds + buffStart == GameData.RoundCount));
+        yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
         Defense = 30;
     }
-
-
 
     public void Fangbite()
     {
@@ -91,7 +89,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         {
             evade = true;
 
-            StartCoroutine(BuffATK(2,2.5f));
+            StartCoroutine(BuffATK(1,2.5f));
             SkillPoint -= 2;
         }
         else
