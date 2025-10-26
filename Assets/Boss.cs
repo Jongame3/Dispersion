@@ -10,7 +10,9 @@ public class Boss : MonoBehaviour, IBaseActions
     public int Defense = 20;
     public bool HellFire = false;
     public bool agr = false;
+    public bool disorientation = false;
     public int timeOfBurningInHell = 1;
+
     [SerializeField] private CharKsiusha fox;
     [SerializeField] private CharPoison yad;
     [SerializeField] private CharNastya fireg;
@@ -20,8 +22,19 @@ public class Boss : MonoBehaviour, IBaseActions
     public void Attack()
     {
         if (agr) {
-            fireg.Hp -= AttackPower;
-            agr = false;
+            if (fireg.parryBool)
+            {
+                Hp -= AttackPower;
+                fireg.parryBool = false;
+            }
+            else
+            {
+                fireg.Hp -= AttackPower;
+            }
+        }
+        else
+        {
+            //Random attack
         }
     }
 
