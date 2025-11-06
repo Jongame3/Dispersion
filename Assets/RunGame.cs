@@ -11,6 +11,8 @@ public class RunGame : MonoBehaviour
     [SerializeField] private CharNastya fireg;
     [SerializeField] private Tsumatsu jirai;
     [SerializeField] private Boss Pasha;
+
+
     void Start()
     {
         
