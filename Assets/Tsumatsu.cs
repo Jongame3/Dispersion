@@ -415,7 +415,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         if(DespairPoint >= 1)
         {
-            int damage = ((Meanie.AttackPower + Reddie.AttackPower + Snake.AttackPower) * DespairPoint)/(Meanie.Hp + Reddie.Hp + Snake.Hp); // Dividing is under a queastion....
+            int damage = ((Meanie.AttackPower + Reddie.AttackPower + Snake.AttackPower) * DespairPoint); // Dividing is under a queastion....
             
             TakeDamage(Hp, false);
             Boss.TakeDamage(damage, false);
