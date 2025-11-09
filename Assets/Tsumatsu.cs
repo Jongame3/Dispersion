@@ -27,6 +27,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     [SerializeField] private CharNastya Reddie;
     [SerializeField] private CharPoison Snake;
     [SerializeField] private RunGame GameData;
+    public GameObject BattleHud;
+    public bool isattacking = false;
     
 
     public void Attack()
@@ -38,21 +40,29 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         if(Hp <= maxHp - amount) Hp = Hp + amount;
         else Hp = maxHp;
+
+        isattacking = false;
     }
     public void HealMeanie(int amount)
     {
         if(Meanie.Hp <= Meanie.maxHp - amount) Meanie.Hp = Meanie.Hp + amount;
         else Meanie.Hp = Meanie.maxHp;
+
+        isattacking = false;
     }
     public void HealReddie(int amount)
     {
         if(Reddie.Hp <= Reddie.maxHp - amount) Reddie.Hp = Reddie.Hp + amount;
         else Reddie.Hp = Reddie.maxHp;
+
+        isattacking = false;
     }
     public void HealSnake(int amount)
     {
         if(Snake.Hp <= Snake.maxHp - amount) Snake.Hp = Snake.Hp + amount;
         else Snake.Hp = Snake.maxHp;
+
+        isattacking = false;
     }
 
     public void TakeDamage(int damage, bool ignore)
@@ -209,6 +219,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             if (Hp > maxHp) Hp = maxHp;
 
             SkillPoint -= 2;
+
+            isattacking = false;
         } else
         {
             // output that not enough SP
@@ -222,6 +234,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             StartCoroutine(BuffDEFMe(2, 100));
             StartCoroutine(BuffSPDMe(3, 30));
             SkillPoint -= 3;
+
+            isattacking = false;
         } else
         {
             // output that not enough SP
@@ -234,6 +248,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             StartCoroutine(BuffDEFMeanie(2, 100));
             StartCoroutine(BuffSPDMeanie(3, 30));
             SkillPoint -= 3;
+
+            isattacking = false;
         } else
         {
             // output that not enough SP
@@ -246,6 +262,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             StartCoroutine(BuffDEFReddie(2, 100));
             StartCoroutine(BuffSPDReddie(3, 30));
             SkillPoint -= 3;
+
+            isattacking = false;
         } else
         {
             // output that not enough SP
@@ -258,6 +276,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             StartCoroutine(BuffDEFSnake(2, 100));
             StartCoroutine(BuffSPDSnake(3, 30));
             SkillPoint -= 3;
+
+            isattacking = false;
         } else
         {
             // output that not enough SP
@@ -272,6 +292,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             {
                 revivePoint++;
                 SkillPoint -= 4;
+
+                isattacking = false;
             }
             else
             {
@@ -284,6 +306,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
                 StartCoroutine(BuffDEFMe(2, 25));
 
                 SkillPoint = 0;
+
+                isattacking = false;
             }
             else
             {
@@ -299,6 +323,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             {
                 Snake.revivePoint++;
                 SkillPoint -= 4;
+
+                isattacking = false;
             }
             else
             {
@@ -311,6 +337,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
                 StartCoroutine(BuffATKSnake(3, 25 * SkillPoint));
 
                 SkillPoint = 0;
+
+                isattacking = false;
             }
             else
             {
@@ -326,6 +354,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             {
                 Reddie.revivePoint++;
                 SkillPoint -= 4;
+
+                isattacking = false;
             }
             else
             {
@@ -338,6 +368,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
                 StartCoroutine(BuffATKReddie(3, 25 * SkillPoint));
 
                 SkillPoint = 0;
+
+                isattacking = false;
             }
             else
             {
@@ -353,6 +385,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             {
                 Meanie.revivePoint++;
                 SkillPoint -= 4;
+
+                isattacking = false;
             }
             else
             {
@@ -365,6 +399,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
                 StartCoroutine(BuffATKMeanie(3, 25 * SkillPoint));
 
                 SkillPoint = 0;
+
+                isattacking = false;
             }
             else
             {
@@ -379,6 +415,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         {
             changedToSweetLie = true;
             DespairPoint -= 1;
+
+            isattacking = false;
         }
         else
         {
@@ -405,6 +443,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
             DespairPoint -= 2;
             SkillPoint += 4;
+
+            isattacking = false;
         } else
         {
             // output that not enough DP
@@ -425,6 +465,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             Snake.TakeDamage(Snake.Hp, false);
 
             DespairPoint = 0;
+
+            isattacking = false;
 
         } else
         {

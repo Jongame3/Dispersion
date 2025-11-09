@@ -12,13 +12,15 @@ public class Boss : MonoBehaviour, IBaseActions
     public bool agr = false;
     public bool disorientation = false;
     public int timeOfBurningInHell = 1;
+    public bool alive = true;
 
     [SerializeField] private CharKsiusha fox;
     [SerializeField] private CharPoison yad;
     [SerializeField] private CharNastya fireg;
-    [SerializeField] private Tsumatsu jirai ;
+    [SerializeField] private Tsumatsu jirai;
+    public bool isattacking = false;
 
-    
+
     public void Attack()
     {
         if (agr) {
@@ -31,6 +33,8 @@ public class Boss : MonoBehaviour, IBaseActions
             {
                 fireg.Hp -= AttackPower;
             }
+
+            isattacking = false;
         }
         else
         {
@@ -40,7 +44,7 @@ public class Boss : MonoBehaviour, IBaseActions
 
     public void TakeDamage(int damage, bool ignore)
     {
-        if (!HellFire)
+        if (HellFire == false)
         {
             if (ignore == false)
             {
@@ -52,13 +56,16 @@ public class Boss : MonoBehaviour, IBaseActions
             }
 
         }
-        Hp -= damage;
-        Hp -= 177 * timeOfBurningInHell;
-        timeOfBurningInHell++;
-
-            if (Hp < 0)
+        else
         {
-            //WIN
+            Hp -= damage;
+            Hp -= 177 * timeOfBurningInHell;
+            timeOfBurningInHell++;
+        }
+
+        if (Hp < 0)
+        {
+            alive = false;
         }
     }
 

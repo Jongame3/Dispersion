@@ -21,6 +21,8 @@ public class CharNastya : MonoBehaviour, IBaseActions
     [SerializeField] private RunGame GameData;
     [SerializeField] private Tsumatsu jirai;
     [SerializeField] private Boss Boss;
+    public GameObject BattleHud;
+    public bool isattacking = false;
 
     public void Attack()
     {
@@ -52,6 +54,8 @@ public class CharNastya : MonoBehaviour, IBaseActions
                 Boss.agr = true;
             }
             SkillPoint--;
+
+            isattacking = false;
         }
         else
         {
@@ -65,6 +69,8 @@ public class CharNastya : MonoBehaviour, IBaseActions
         {
             parryBool = true;
             SkillPoint -= 2;
+
+            isattacking = false;
         }
         else
         {
@@ -79,6 +85,8 @@ public class CharNastya : MonoBehaviour, IBaseActions
             Boss.TakeDamage(Boss.maxHp/10, false);
             StartCoroutine(disorientBuff(4));
             SkillPoint -= 3;
+
+            isattacking = false;
 
         }
         else
@@ -95,6 +103,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
             Hp = maxHp;
             SkillPoint -= 5;
 
+            isattacking = false;
         }
         else
         {

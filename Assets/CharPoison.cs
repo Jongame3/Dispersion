@@ -17,12 +17,16 @@ public class CharPoison : MonoBehaviour, IBaseActions
 
     [SerializeField] private Boss Boss;
     [SerializeField] private Tsumatsu jirai;
+    public GameObject BattleHud;
+    public bool isattacking = false;
 
 
     public void Attack()
     {
         Boss.TakeDamage(AttackPower, false);
         SkillPoint++;
+
+        isattacking = false;
     }
 
     public void TakeDamage(int damage, bool ignore)
@@ -54,6 +58,8 @@ public class CharPoison : MonoBehaviour, IBaseActions
         {
             Hp -=(int) Hp / 3;
             SkillPoint += 2;
+
+            isattacking = false;
         }
         else
         {
@@ -66,6 +72,8 @@ public class CharPoison : MonoBehaviour, IBaseActions
         {
             phantomHp += 30;
             SkillPoint -= 3;
+
+            isattacking = false;
         }
         else
         {
@@ -77,6 +85,8 @@ public class CharPoison : MonoBehaviour, IBaseActions
         if (SkillPoint == 10)
         {
             Boss.TakeDamage(Boss.Hp, true);
+
+            isattacking = false;
         }
         else
         {

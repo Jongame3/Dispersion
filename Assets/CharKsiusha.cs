@@ -19,11 +19,15 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     [SerializeField] private Boss Boss;
     [SerializeField] private Tsumatsu jirai;
     [SerializeField] private RunGame GameData;
+    public GameObject BattleHud;
+    public bool isattacking = false;
 
     public void Attack()
     {
         Boss.TakeDamage(AttackPower, false);
         SkillPoint++;
+
+        isattacking = false;
     }
 
 
@@ -47,6 +51,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     {
         BuffDEF(1, 1.5f);
         SkillPoint++;
+
+        isattacking = false;
     }
 
     private IEnumerator BuffATK(uint rounds, float multiplier)
@@ -78,6 +84,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
             Boss.TakeDamage(AttackPower, false) ;
             Hp += 10;
             SkillPoint -= 1;
+
+            isattacking = false;
         }
         else
         {
@@ -93,6 +101,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
             StartCoroutine(BuffATK(1,2.5f));
             SkillPoint -= 2;
+
+            isattacking = false;
         }
         else
         {
@@ -112,6 +122,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
             Boss.TakeDamage((int)(AttackPower * modifier), false);
             SkillPoint -= 3;
+
+            isattacking = false;
         }
         else
         {
@@ -127,6 +139,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
             float modifier = 6;
             Boss.TakeDamage((int)(AttackPower * modifier), true);
             SkillPoint -= 4;
+
+            isattacking = false;
         }
         else
         {
