@@ -1,6 +1,7 @@
-using System.Collections;
-using UnityEngine;
 using System;
+using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class CharKsiusha : MonoBehaviour, IBaseActions
 {
@@ -21,6 +22,9 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     [SerializeField] private RunGame GameData;
     public GameObject BattleHud;
     public bool isattacking = false;
+    public TextMeshProUGUI Text;
+    public TextMeshProUGUI HPtext;
+    public TextMeshProUGUI SpText;
 
     public void Attack()
     {
@@ -40,11 +44,13 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
         Hp -= (damage * (1 - Defense/100));
         jirai.DespairPoint++;
+
         if (Hp <= 0 && revivePoint > 0) { Hp = maxHp/2; }
         else if (Hp < 0) 
         {
             Alive = false;
         }
+
     }
 
     public void Def()
@@ -89,7 +95,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
         else
         {
-            // output that not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 
@@ -106,7 +112,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
         else
         {
-            // output that not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 
@@ -127,7 +133,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
         else
         {
-            // output that not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 
@@ -144,7 +150,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
         else
         {
-            // output that not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
 
     }

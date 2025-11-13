@@ -1,15 +1,14 @@
-using JetBrains.Annotations;
-using System;
+
 using System.Collections;
-using UnityEditor.Build.Reporting;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 
 public class Tsumatsu : MonoBehaviour, IBaseActions
 {
     public int Hp = 70;
-    public const int maxHp = 70;
+    public int maxHp = 70;
     public int Defense = 30;
     public int Speed = 100;
     public int AttackPower = 0;
@@ -20,7 +19,6 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public int revivePoint = 0;
     public bool Alive = true;
 
-    public bool changedToSweetLie = false;
 
     [SerializeField] private Boss Boss;
     [SerializeField] private CharKsiusha Meanie;
@@ -28,39 +26,135 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     [SerializeField] private CharPoison Snake;
     [SerializeField] private RunGame GameData;
     public GameObject BattleHud;
+    public GameObject DespairHud;
+    public GameObject HealUI;
+    public GameObject DelusionUI;
+    public GameObject BTFUI;
     public bool isattacking = false;
-    
+    public bool DespairMode = false;
+    public TextMeshProUGUI Text;
+    public TextMeshProUGUI SPText;
+    public TextMeshProUGUI SPText2;
+    public TextMeshProUGUI DPText;
+    public TextMeshProUGUI DPText2;
+    public Sprite DespairSprite;
+    public Sprite BaseSprite;
+    public TextMeshProUGUI HPtext;
+    public TextMeshProUGUI HPtext2;
+
 
     public void Attack()
     {
-        
+        HealUI.SetActive(true);
     }
 
-    public void HealMe(int amount)
+    public void Delusion()
     {
-        if(Hp <= maxHp - amount) Hp = Hp + amount;
-        else Hp = maxHp;
+        if (SkillPoint >= 3)
+        {
+            DelusionUI.SetActive(true);
+            SkillPoint -= 3;
+        }
+        else
+        {
+            Text.text = "Недостаточно Очков Умений";
+        }
+    }
+
+    public void BackToFriends()
+    {
+        if (SkillPoint >= 4)
+        {
+            BTFUI.SetActive(true);
+            SkillPoint -= 4;
+        }
+        else
+        {
+            Text.text = "Недостаточно Очков Умений";
+        }
+    }
+
+    public void Defence()
+    {
+        StartCoroutine(BuffDEFMe(1, 30));
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint++;
+        }
+    }
+
+    public void DespairModeOn()
+    {
+        if (SkillPoint >= 1)
+        {
+            DespairMode = true;
+            this.gameObject.GetComponent<Image>().sprite = DespairSprite;
+            SkillPoint -= 1;
+
+            isattacking = false;
+        }
+        else
+        {
+            Text.text = "Недостаточно Очков Умений";
+        }
+    }
+
+    public void FirstMode()
+    {
+        DespairMode = false;
+        this.gameObject.GetComponent<Image>().sprite = BaseSprite;
 
         isattacking = false;
     }
-    public void HealMeanie(int amount)
+
+    public void HealMe()
     {
-        if(Meanie.Hp <= Meanie.maxHp - amount) Meanie.Hp = Meanie.Hp + amount;
+        if (Hp <= maxHp - 20) Hp = Hp + 20;
+        else Hp = maxHp;
+        if (SkillPoint < MaxSkillPoint) {
+            SkillPoint++;
+        }
+        HealUI.SetActive(false);
+
+        isattacking = false;
+    }
+    public void HealMeanie()
+    {
+        if (Meanie.Hp <= Meanie.maxHp - 20) Meanie.Hp = Meanie.Hp + 20;
         else Meanie.Hp = Meanie.maxHp;
 
-        isattacking = false;
-    }
-    public void HealReddie(int amount)
-    {
-        if(Reddie.Hp <= Reddie.maxHp - amount) Reddie.Hp = Reddie.Hp + amount;
-        else Reddie.Hp = Reddie.maxHp;
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint++;
+        }
+        HealUI.SetActive(false);
 
         isattacking = false;
     }
-    public void HealSnake(int amount)
+    public void HealReddie()
     {
-        if(Snake.Hp <= Snake.maxHp - amount) Snake.Hp = Snake.Hp + amount;
+        if (Reddie.Hp <= Reddie.maxHp - 20) Reddie.Hp = Reddie.Hp + 20;
+        else Reddie.Hp = Reddie.maxHp;
+
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint++;
+        }
+        HealUI.SetActive(false);
+
+        isattacking = false;
+    }
+    public void HealSnake()
+    {
+        if (Snake.Hp <= Snake.maxHp - 20) Snake.Hp = Snake.Hp + 20;
         else Snake.Hp = Snake.maxHp;
+
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint++;
+        }
+        HealUI.SetActive(false);
+
 
         isattacking = false;
     }
@@ -68,14 +162,17 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public void TakeDamage(int damage, bool ignore)
     {
         Hp -= (damage * (1 - Defense / 100));
-        if (Hp <= 0 && revivePoint > 0) { 
-            Hp = maxHp/2;
+
+        if (Hp <= 0 && revivePoint > 0)
+        {
+            Hp = maxHp / 2;
             revivePoint--;
         }
         else if (Hp < 0)
         {
             Alive = false;
         }
+
     }
 
     private IEnumerator hellFireToBoss(uint rounds)
@@ -97,7 +194,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
         yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
-        Reddie.AttackPower = 50;
+        Reddie.AttackPower = 70;
     }
     private IEnumerator BuffATKSnake(uint rounds, int amount)
     {
@@ -107,7 +204,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
         yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
-        Snake.AttackPower = 50;
+        Snake.AttackPower = 70;
     }
     private IEnumerator BuffATKMeanie(uint rounds, int amount)
     {
@@ -135,10 +232,10 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         uint buffStart = GameData.RoundCount;
 
-        if(amount == 100) Meanie.Defense = amount;
+        if (amount == 100) Meanie.Defense = amount;
         else Meanie.Defense = Meanie.Defense + amount;
 
-            yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
+        yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
         Meanie.Defense = 30;
     }
@@ -151,7 +248,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
         yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
-        Reddie.Defense = 0;
+        Reddie.Defense = 40;
     }
     private IEnumerator BuffDEFSnake(uint rounds, int amount)
     {
@@ -162,7 +259,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
         yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
-        Snake.Defense = 0;
+        Snake.Defense = 40;
     }
     private IEnumerator BuffSPDMe(uint rounds, int amount)
     {
@@ -207,10 +304,10 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
     public void Comedy()
     {
-        if(SkillPoint >= 2)
+        if (SkillPoint >= 2)
         {
             Meanie.Hp += 50;
-            if(Meanie.Hp > Meanie.maxHp) Meanie.Hp = Meanie.maxHp;
+            if (Meanie.Hp > Meanie.maxHp) Meanie.Hp = Meanie.maxHp;
             Reddie.Hp += 50;
             if (Reddie.Hp > Reddie.maxHp) Reddie.Hp = Reddie.maxHp;
             Snake.Hp += 50;
@@ -221,208 +318,76 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             SkillPoint -= 2;
 
             isattacking = false;
-        } else
+        }
+        else
         {
-            // output that not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 
     public void DelusionMe()
     {
-        if(SkillPoint >= 3)
-        {
-            StartCoroutine(BuffDEFMe(2, 100));
-            StartCoroutine(BuffSPDMe(3, 30));
-            SkillPoint -= 3;
 
-            isattacking = false;
-        } else
-        {
-            // output that not enough SP
-        }
+        StartCoroutine(BuffDEFMe(2, 100));
+        StartCoroutine(BuffSPDMe(3, 30));
+
+        isattacking = false;
+
     }
     public void DelusionMeanie()
     {
-        if(SkillPoint >= 3)
-        {
-            StartCoroutine(BuffDEFMeanie(2, 100));
-            StartCoroutine(BuffSPDMeanie(3, 30));
-            SkillPoint -= 3;
 
-            isattacking = false;
-        } else
-        {
-            // output that not enough SP
-        }
+        StartCoroutine(BuffDEFMeanie(2, 100));
+        StartCoroutine(BuffSPDMeanie(3, 30));
+
+        isattacking = false;
+
     }
     public void DelusionReddie()
     {
-        if(SkillPoint >= 3)
-        {
-            StartCoroutine(BuffDEFReddie(2, 100));
-            StartCoroutine(BuffSPDReddie(3, 30));
-            SkillPoint -= 3;
+        StartCoroutine(BuffDEFReddie(2, 100));
+        StartCoroutine(BuffSPDReddie(3, 30));
 
-            isattacking = false;
-        } else
-        {
-            // output that not enough SP
-        }
+        isattacking = false;
     }
     public void DelusionSnake()
     {
-        if(SkillPoint >= 3)
-        {
-            StartCoroutine(BuffDEFSnake(2, 100));
-            StartCoroutine(BuffSPDSnake(3, 30));
-            SkillPoint -= 3;
+        StartCoroutine(BuffDEFSnake(2, 100));
+        StartCoroutine(BuffSPDSnake(3, 30));
 
-            isattacking = false;
-        } else
-        {
-            // output that not enough SP
-        }
+        isattacking = false;
     }
 
     public void BackToFriendsMe()
     {
-        if (!changedToSweetLie)
-        {
-            if (SkillPoint >= 4)
-            {
-                revivePoint++;
-                SkillPoint -= 4;
 
-                isattacking = false;
-            }
-            else
-            {
-                // output that not enough SP
-            }
-        } else
-        {
-            if(SkillPoint >= 1)
-            {
-                StartCoroutine(BuffDEFMe(2, 25));
+        revivePoint++;
 
-                SkillPoint = 0;
-
-                isattacking = false;
-            }
-            else
-            {
-                // output that not enough SP
-            }
-        }
+        isattacking = false;
     }
+
     public void BackToFriendsSnake()
     {
-        if (!changedToSweetLie)
-        {
-            if (SkillPoint >= 4)
-            {
-                Snake.revivePoint++;
-                SkillPoint -= 4;
 
-                isattacking = false;
-            }
-            else
-            {
-                // output that not enough SP
-            }
-        } else
-        {
-            if(SkillPoint >= 1)
-            {
-                StartCoroutine(BuffATKSnake(3, 25 * SkillPoint));
+        Snake.revivePoint++;
 
-                SkillPoint = 0;
-
-                isattacking = false;
-            }
-            else
-            {
-                // output that not enough SP
-            }
-        }
+        isattacking = false;
     }
-    public void BackToFriendsReddie()
-    {
-        if (!changedToSweetLie)
-        {
-            if (SkillPoint >= 4)
-            {
-                Reddie.revivePoint++;
-                SkillPoint -= 4;
 
-                isattacking = false;
-            }
-            else
-            {
-                // output that not enough SP
-            }
-        } else
-        {
-            if(SkillPoint >= 1)
-            {
-                StartCoroutine(BuffATKReddie(3, 25 * SkillPoint));
-
-                SkillPoint = 0;
-
-                isattacking = false;
-            }
-            else
-            {
-                // output that not enough SP
-            }
-        }
-    }
     public void BackToFriendsMeanie()
     {
-        if (!changedToSweetLie)
-        {
-            if (SkillPoint >= 4)
-            {
-                Meanie.revivePoint++;
-                SkillPoint -= 4;
+        Meanie.revivePoint++;
 
-                isattacking = false;
-            }
-            else
-            {
-                // output that not enough SP
-            }
-        } else
-        {
-            if(SkillPoint >= 1)
-            {
-                StartCoroutine(BuffATKMeanie(3, 25 * SkillPoint));
-
-                SkillPoint = 0;
-
-                isattacking = false;
-            }
-            else
-            {
-                // output that not enough SP
-            }
-        }
+        isattacking = false;
     }
 
-    public void TheGloryOfThePast()
+    public void BackToFriendsReddie()
     {
-        if(DespairPoint >= 1)
-        {
-            changedToSweetLie = true;
-            DespairPoint -= 1;
+        Reddie.revivePoint++;
 
-            isattacking = false;
-        }
-        else
-        {
-            // output that not enough DP
-        }
+        isattacking = false;
     }
+
 
     public void Broken()
     {
@@ -445,21 +410,22 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             SkillPoint += 4;
 
             isattacking = false;
-        } else
+        }
+        else
         {
-            // output that not enough DP
+            Text.text = "Недостаточно Очков Отчаяния";
         }
     }
 
     public void EndlessLove()
     {
-        if(DespairPoint >= 1)
+        if (DespairPoint >= 1)
         {
             int damage = ((Meanie.AttackPower + Reddie.AttackPower + Snake.AttackPower) * DespairPoint); // Dividing is under a queastion....
-            
+
             TakeDamage(Hp, false);
             Boss.TakeDamage(damage, false);
-            hellFireToBoss(2);
+            StartCoroutine(hellFireToBoss(2));
             Meanie.TakeDamage(Meanie.Hp, false);
             Reddie.TakeDamage(Reddie.Hp, false);
             Snake.TakeDamage(Snake.Hp, false);
@@ -468,11 +434,28 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
             isattacking = false;
 
-        } else
+        }
+        else
         {
-            // output that not enough DP
+            Text.text = "Недостаточно Очков Отчаяния";
+        }
+    }
+    public void SweetLie()
+    {
+        if (SkillPoint >= 1)
+        {
+            StartCoroutine(BuffATKMeanie(2, 25 * SkillPoint));
+            StartCoroutine(BuffATKReddie(2, 25 * SkillPoint));
+            StartCoroutine(BuffATKSnake(2, 25 * SkillPoint));
+            StartCoroutine(BuffDEFMe(2, 25));
+            SkillPoint = 0;
+
+            isattacking = false;
+        }
+        else
+        {
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 
-
-}
+};

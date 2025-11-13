@@ -38,7 +38,10 @@ public class Boss : MonoBehaviour, IBaseActions
         }
         else
         {
-            //Random attack
+            fox.TakeDamage(10, false);
+            yad.TakeDamage(10, false);
+            fireg.TakeDamage(10, false);
+            jirai.TakeDamage(10, false);
         }
     }
 
@@ -54,7 +57,6 @@ public class Boss : MonoBehaviour, IBaseActions
             {
                 Hp -= damage;
             }
-
         }
         else
         {

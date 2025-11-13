@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,6 +16,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
     public int MaxSkillPoint = 10;
     public bool Alive = true;
     public bool parryBool = false;
+    public TextMeshProUGUI Text;
 
     public int revivePoint = 0;
 
@@ -23,21 +25,34 @@ public class CharNastya : MonoBehaviour, IBaseActions
     [SerializeField] private Boss Boss;
     public GameObject BattleHud;
     public bool isattacking = false;
+    public TextMeshProUGUI HPtext;
+    public TextMeshProUGUI SpText;
 
     public void Attack()
     {
         Boss.TakeDamage(AttackPower * (maxHp/2), false);
+
+        isattacking = false;
     }
 
     public void TakeDamage(int damage, bool ignore)
     {
         Hp -= (damage * (1 - Defense / 100));
         jirai.DespairPoint++;
+
         if (Hp <= 0 && revivePoint > 0) { Hp = maxHp / 2; }
+
         else if (Hp < 0)
         {
             Alive = false;
         }
+
+        HPtext.text = "HP:" + Hp.ToString() + "/" + maxHp.ToString();
+    }
+
+    public void Defence()
+    {
+
     }
 
     public void agr()
@@ -59,7 +74,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
         }
         else
         {
-            //output that not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 
@@ -74,7 +89,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
         }
         else
         {
-            //output that not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 
@@ -91,7 +106,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
         }
         else
         {
-            //output that not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 
@@ -107,7 +122,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
         }
         else
         {
-            //output that not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 

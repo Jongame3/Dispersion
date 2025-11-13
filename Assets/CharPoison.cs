@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,13 +13,17 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public int AttackPower = 70;
     public int revivePoint = 0;
     public int SkillPoint = 0;
+    public int MaxSkillPoint = 10;
     public int Defense = 40;
-    bool Alive = true;
+    [SerializeField]  bool Alive = true;
 
     [SerializeField] private Boss Boss;
     [SerializeField] private Tsumatsu jirai;
     public GameObject BattleHud;
     public bool isattacking = false;
+    public TextMeshProUGUI Text;
+    public TextMeshProUGUI HPtext;
+    public TextMeshProUGUI SpText;
 
 
     public void Attack()
@@ -31,9 +36,9 @@ public class CharPoison : MonoBehaviour, IBaseActions
 
     public void TakeDamage(int damage, bool ignore)
     {
-        if(phantomHp != 0)
+        if (phantomHp != 0)
         {
-            if(damage > phantomHp)
+            if (damage > phantomHp)
             {
                 damage -= phantomHp;
                 phantomHp = 0;
@@ -44,26 +49,34 @@ public class CharPoison : MonoBehaviour, IBaseActions
             }
         }
 
-        Hp -= (damage * (1 - Defense / 100));
-        jirai.DespairPoint++;
-        if (Hp <= 0 && revivePoint >= 1) { Hp = 20; }
+        else {
+            Hp -= (damage * (1 - Defense / 100));
+            jirai.DespairPoint++;
+        }
+
+        if (Hp <= 0 && revivePoint >= 1) { Hp = 20; revivePoint--; }
+
         else if (Hp <= 0)
         {
             Alive = false;
         }
+
+        HPtext.text = "HP:" + (Hp + phantomHp).ToString() + "/" + maxHp.ToString();
     }
     public void InjectionAlpha()
     {
         if (SkillPoint >= 1)
         {
             Hp -=(int) Hp / 3;
+            HPtext.text = "HP:" + (Hp + phantomHp).ToString() + "/" + maxHp.ToString();
+
             SkillPoint += 2;
 
             isattacking = false;
         }
         else
         {
-            //Not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
     public void InjectionBeta()
@@ -77,7 +90,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
         }
         else
         {
-            //Not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
     public void InjectionGamma()
@@ -90,7 +103,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
         }
         else
         {
-            //Not enough SP
+            Text.text = "Недостаточно Очков Умений";
         }
     }
 }

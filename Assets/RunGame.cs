@@ -24,15 +24,37 @@ public class RunGame : MonoBehaviour
             {
                 if (actionqueue.Peek() == "TSUMATSU")
                 {
-                    jirai.BattleHud.SetActive(true);
+                    if (jirai.DespairMode == false) {
+                        jirai.BattleHud.SetActive(true);
 
-                    jirai.isattacking = true;
+                        jirai.SPText.text = "Sp:" + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString();
+                        jirai.HPtext.text = "HP:" + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString();
+                        jirai.DPText.text = "DP:" + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
 
-                    yield return new WaitUntil(() => jirai.isattacking == false);
+                        jirai.isattacking = true;
 
-                    jirai.BattleHud.SetActive(false);
-                    actionqueue.Dequeue();
+                        yield return new WaitUntil(() => jirai.isattacking == false);
 
+                        jirai.BattleHud.SetActive(false);
+                        actionqueue.Dequeue();
+                    }
+                    else
+                    {
+                        jirai.DespairHud.SetActive(true);
+
+                        jirai.isattacking = true;
+
+                        jirai.SPText2.text = "Sp:" + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString();
+                        jirai.HPtext2.text = "HP:" + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString();
+                        jirai.DPText2.text = "DP:" + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
+
+
+                        yield return new WaitUntil(() => jirai.isattacking == false);
+
+                        jirai.DespairHud.SetActive(false);
+                        actionqueue.Dequeue();
+                    }
+                    continue;
                 }
 
                 if (actionqueue.Peek() == "FOX")
@@ -41,10 +63,15 @@ public class RunGame : MonoBehaviour
 
                     fox.isattacking = true;
 
+                    fox.SpText.text = "Sp:" + fox.SkillPoint.ToString() + "/" + fox.MaxSkillPoint.ToString();
+                    fox.HPtext.text = "HP:" + fox.Hp.ToString() + "/" + fox.maxHp.ToString();
+
                     yield return new WaitUntil(() => fox.isattacking == false);
 
                     fox.BattleHud.SetActive(false);
                     actionqueue.Dequeue();
+
+                    continue;
                 }
 
 
@@ -54,13 +81,16 @@ public class RunGame : MonoBehaviour
 
                     fireg.isattacking = true;
 
+                    fireg.SpText.text = "Sp:" + fireg.SkillPoint.ToString() + "/" + fireg.MaxSkillPoint.ToString();
+                    fireg.HPtext.text = "HP:" + fireg.Hp.ToString() + "/" + fireg.maxHp.ToString();
+
                     yield return new WaitUntil(() => fireg.isattacking == false);
 
                     fireg.BattleHud.SetActive(false);
                     actionqueue.Dequeue();
+
+                    continue;
                 }
-
-
 
 
                 if (actionqueue.Peek() == "POISON")
@@ -69,15 +99,22 @@ public class RunGame : MonoBehaviour
 
                     yad.isattacking = true;
 
+                    yad.SpText.text = "Sp:" + yad.SkillPoint.ToString() + "/" + yad.MaxSkillPoint.ToString();
+                    yad.HPtext.text = "HP:" + yad.Hp.ToString() + "/" + yad.maxHp.ToString();
+
                     yield return new WaitUntil(() => yad.isattacking == false);
 
                     yad.BattleHud.SetActive(false);
                     actionqueue.Dequeue();
+                    continue;
+
                 }
 
             }
 
-            
+            Boss.Attack();
+
+            CreateQueue();
         }
     }
 
