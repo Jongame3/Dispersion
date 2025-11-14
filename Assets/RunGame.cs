@@ -35,6 +35,9 @@ public class RunGame : MonoBehaviour
                         yield return new WaitUntil(() => jirai.isattacking == false);
 
                         jirai.BattleHud.SetActive(false);
+                        jirai.HealUI.SetActive(false);
+                        jirai.BTFUI.SetActive(false); 
+                        jirai.DelusionUI.SetActive(false);
                         actionqueue.Dequeue();
                     }
                     else
@@ -113,6 +116,7 @@ public class RunGame : MonoBehaviour
 
             Boss.HPtext.text = "HP:" + Boss.Hp.ToString() + "/" + Boss.maxHp.ToString();
             Boss.Attack();
+            RoundCount++;
 
             CreateQueue();
         }

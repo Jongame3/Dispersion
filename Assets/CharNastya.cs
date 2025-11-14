@@ -9,7 +9,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
 
     public int Hp = 90;
     public int maxHp = 90;
-    public int Defense = 40;
+    public float Defense = 40;
     public int Speed = 0;
     public int AttackPower = 70;
     public int SkillPoint = 0;
@@ -32,22 +32,41 @@ public class CharNastya : MonoBehaviour, IBaseActions
     {
         Boss.TakeDamage((int)(AttackPower * (1+(maxHp/200))), false);
 
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint++;
+        }
+
         isattacking = false;
     }
 
     public void TakeDamage(int damage, bool ignore)
     {
-        Hp -= (damage * (1 - Defense / 100));
-        jirai.DespairPoint++;
 
-        if (Hp <= 0 && revivePoint > 0) { Hp = maxHp / 2; }
+        if (!parryBool) { 
+        
+            float percentDefence = 1 - (Defense / 100);
 
-        else if (Hp < 0)
-        {
-            Alive = false;
+            int effdamage = (int)(damage * percentDefence);
+            Hp -= effdamage;
+
+            if (jirai.DespairPoint < jirai.maxDespairPoint)
+            {
+                jirai.DespairPoint++;
+            }
+
+            if (Hp <= 0 && revivePoint > 0) { Hp = maxHp / 2; }
+
+            else if (Hp < 0)
+            {
+                Alive = false;
+            }
+
         }
-
-        HPtext.text = "HP:" + Hp.ToString() + "/" + maxHp.ToString();
+        else
+        {
+            Boss.TakeDamage(damage, true);
+        }
     }
 
     public void Defence()

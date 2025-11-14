@@ -7,7 +7,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 {
     public int Hp = 40;
     public int maxHp = 40;
-    public int Defense = 30;
+    public float Defense = 30;
     public int Speed = 80;
     public int AttackPower = 50;
     public int SkillPoint = 0;
@@ -42,8 +42,15 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
             return; 
         }
 
-        Hp -= (damage * (1 - Defense/100));
-        jirai.DespairPoint++;
+        float percentDefence = 1 - (Defense / 100);
+
+        int effdamage = (int)(damage * percentDefence);
+        Hp -= effdamage;
+
+        if (jirai.DespairPoint < jirai.maxDespairPoint)
+        {
+            jirai.DespairPoint++;
+        }
 
         if (Hp <= 0 && revivePoint > 0) { Hp = maxHp/2; }
         else if (Hp < 0) 

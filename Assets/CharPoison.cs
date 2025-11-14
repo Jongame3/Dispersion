@@ -14,7 +14,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public int revivePoint = 0;
     public int SkillPoint = 0;
     public int MaxSkillPoint = 10;
-    public int Defense = 40;
+    public float Defense = 40;
     [SerializeField]  bool Alive = true;
 
     [SerializeField] private Boss Boss;
@@ -29,8 +29,12 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public void Attack()
     {
         Boss.TakeDamage(AttackPower, false);
-        SkillPoint++;
 
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint++;
+        }
+        phantomHp += 10;
         isattacking = false;
     }
     public void Defence()
@@ -45,12 +49,17 @@ public class CharPoison : MonoBehaviour, IBaseActions
 
     public void TakeDamage(int damage, bool ignore)
     {
+        float percentDefence = 1 - (Defense / 100);
+
         if (phantomHp != 0)
         {
             if (damage > phantomHp)
             {
                 damage -= phantomHp;
                 phantomHp = 0;
+
+                int effdamage = (int)(damage * percentDefence);
+                Hp -= effdamage;
             }
             else
             {
@@ -59,8 +68,8 @@ public class CharPoison : MonoBehaviour, IBaseActions
         }
 
         else {
-            Hp -= (damage * (1 - Defense / 100));
-            jirai.DespairPoint++;
+            int effdamage = (int)(damage * percentDefence);
+            Hp -= effdamage;
         }
 
         if (Hp <= 0 && revivePoint >= 1) { Hp = 20; revivePoint--; }
@@ -68,6 +77,11 @@ public class CharPoison : MonoBehaviour, IBaseActions
         else if (Hp <= 0)
         {
             Alive = false;
+        }
+
+        if (jirai.DespairPoint < jirai.maxDespairPoint)
+        {
+            jirai.DespairPoint++;
         }
 
         HPtext.text = "HP:" + (Hp + phantomHp).ToString() + "/" + maxHp.ToString();

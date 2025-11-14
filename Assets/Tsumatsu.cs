@@ -9,7 +9,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 {
     public int Hp = 70;
     public int maxHp = 70;
-    public int Defense = 30;
+    public float Defense = 30;
     public int Speed = 100;
     public int AttackPower = 0;
     public int SkillPoint = 0;
@@ -81,6 +81,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         {
             SkillPoint += 2;
         }
+        isattacking = false;
     }
 
     public void DespairModeOn()
@@ -161,18 +162,21 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
     public void TakeDamage(int damage, bool ignore)
     {
-        Hp -= (damage * (1 - Defense / 100));
+        float percentDefence = 1 - (Defense / 100);
+
+        int effdamage = (int)(damage * percentDefence);
+        Hp -= effdamage;
 
         if (Hp <= 0 && revivePoint > 0)
         {
             Hp = maxHp / 2;
             revivePoint--;
         }
+
         else if (Hp < 0)
         {
             Alive = false;
         }
-        DespairPoint++;
     }
 
     private IEnumerator hellFireToBoss(uint rounds)
