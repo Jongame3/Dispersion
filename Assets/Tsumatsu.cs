@@ -1,4 +1,4 @@
-
+п»ї
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -57,7 +57,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Недостаточно Очков Умений";
+            Text.text = "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РћС‡РєРѕРІ РЈРјРµРЅРёР№";
         }
     }
 
@@ -70,16 +70,16 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Недостаточно Очков Умений";
+            Text.text = "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РћС‡РєРѕРІ РЈРјРµРЅРёР№";
         }
     }
 
     public void Defence()
     {
-        StartCoroutine(BuffDEFMe(1, 30));
+        StartCoroutine(BuffDEFMe(1, 15));
         if (SkillPoint < MaxSkillPoint)
         {
-            SkillPoint++;
+            SkillPoint += 2;
         }
     }
 
@@ -95,7 +95,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Недостаточно Очков Умений";
+            Text.text = "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РћС‡РєРѕРІ РЈРјРµРЅРёР№";
         }
     }
 
@@ -172,7 +172,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         {
             Alive = false;
         }
-
+        DespairPoint++;
     }
 
     private IEnumerator hellFireToBoss(uint rounds)
@@ -321,7 +321,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Недостаточно Очков Умений";
+            Text.text = "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РћС‡РєРѕРІ РЈРјРµРЅРёР№";
         }
     }
 
@@ -413,7 +413,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Недостаточно Очков Отчаяния";
+            Text.text = "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РћС‡РєРѕРІ РћС‚С‡Р°СЏРЅРёСЏ";;
         }
     }
 
@@ -437,7 +437,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Недостаточно Очков Отчаяния";
+            Text.text = "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РћС‡РєРѕРІ РћС‚С‡Р°СЏРЅРёСЏ";;
         }
     }
     public void SweetLie()
@@ -454,7 +454,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Недостаточно Очков Умений";
+            Text.text = "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РћС‡РєРѕРІ РЈРјРµРЅРёР№";
         }
     }
 

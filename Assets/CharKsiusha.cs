@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -55,8 +55,11 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
     public void Def()
     {
-        BuffDEF(1, 1.5f);
-        SkillPoint++;
+        StartCoroutine(BuffDEF(1, 1.5f));
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint += 2;
+        }
 
         isattacking = false;
     }
@@ -95,7 +98,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
     }
 
@@ -112,7 +115,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
     }
 
@@ -133,7 +136,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
     }
 
@@ -150,7 +153,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
 
     }

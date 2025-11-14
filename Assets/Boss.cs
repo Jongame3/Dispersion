@@ -1,6 +1,7 @@
-using UnityEngine;
-using System.Collections;
 using System;
+using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class Boss : MonoBehaviour, IBaseActions
 {
@@ -19,7 +20,7 @@ public class Boss : MonoBehaviour, IBaseActions
     [SerializeField] private CharNastya fireg;
     [SerializeField] private Tsumatsu jirai;
     public bool isattacking = false;
-
+    public TextMeshProUGUI HPtext;
 
     public void Attack()
     {
@@ -69,6 +70,9 @@ public class Boss : MonoBehaviour, IBaseActions
         {
             alive = false;
         }
+
+        HPtext.text = "HP:" + Hp.ToString() + "/" + maxHp.ToString();
+
     }
 
 }

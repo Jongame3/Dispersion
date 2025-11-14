@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -24,13 +24,22 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public TextMeshProUGUI Text;
     public TextMeshProUGUI HPtext;
     public TextMeshProUGUI SpText;
-
+    [SerializeField] private RunGame GameData;
 
     public void Attack()
     {
         Boss.TakeDamage(AttackPower, false);
         SkillPoint++;
 
+        isattacking = false;
+    }
+    public void Defence()
+    {
+        StartCoroutine(BuffDEF(1, 1.5f));
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint += 2;
+        }
         isattacking = false;
     }
 
@@ -76,7 +85,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
     }
     public void InjectionBeta()
@@ -90,7 +99,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
     }
     public void InjectionGamma()
@@ -103,7 +112,18 @@ public class CharPoison : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
+    }
+
+    private IEnumerator BuffDEF(uint rounds, float multiplier)
+    {
+        uint buffStart = GameData.RoundCount;
+
+        Defense = (int)(Defense * multiplier);
+
+        yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
+
+        Defense = 30;
     }
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3e98916621f94fe4a9f3b04c2408434a
+guid: 20b630fc2f7b90b43b29c86426ba10ce
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3501889833286323744
-    second: placeholder2_0
+      213: -9157198654136117617
+    second: buff1shinoai_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: placeholder2_0
+      name: buff1shinoai_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 270
-        height: 270
+        width: 167
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0e1ba6c10c9c66fc0800000000000000
-      internalID: -3501889833286323744
+      spriteID: f86188a47581be080800000000000000
+      internalID: -9157198654136117617
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      placeholder2_0: -3501889833286323744
+      buff1shinoai_0: -9157198654136117617
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

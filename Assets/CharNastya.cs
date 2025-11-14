@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -30,7 +30,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
 
     public void Attack()
     {
-        Boss.TakeDamage(AttackPower * (maxHp/2), false);
+        Boss.TakeDamage((int)(AttackPower * (1+(maxHp/200))), false);
 
         isattacking = false;
     }
@@ -52,7 +52,12 @@ public class CharNastya : MonoBehaviour, IBaseActions
 
     public void Defence()
     {
-
+        StartCoroutine(BuffDEF(1, 1.5f));
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint += 2;
+        }
+        isattacking = false;
     }
 
     public void agr()
@@ -74,7 +79,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
     }
 
@@ -89,7 +94,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
     }
 
@@ -106,7 +111,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
     }
 
@@ -122,19 +127,19 @@ public class CharNastya : MonoBehaviour, IBaseActions
         }
         else
         {
-            Text.text = "Íåäîñòàòî÷íî Î÷êîâ Óìåíèé";
+            Text.text = "ÐÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐžÑ‡ÐºÐ¾Ð² Ð£Ð¼ÐµÐ½Ð¸Ð¹";
         }
     }
 
-    private IEnumerator BuffDEF(uint rounds, int amount)
+    private IEnumerator BuffDEF(uint rounds, float multiplier)
     {
         uint buffStart = GameData.RoundCount;
 
-        Defense += amount;
+        Defense = (int)(Defense * multiplier);
 
         yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
-        Defense = 40;  
+        Defense = 40;
     }
 
     private IEnumerator disorientBuff(uint rounds)

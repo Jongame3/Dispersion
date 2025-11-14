@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class RunGame : MonoBehaviour
 {
@@ -112,6 +111,7 @@ public class RunGame : MonoBehaviour
 
             }
 
+            Boss.HPtext.text = "HP:" + Boss.Hp.ToString() + "/" + Boss.maxHp.ToString();
             Boss.Attack();
 
             CreateQueue();
@@ -159,6 +159,8 @@ public class RunGame : MonoBehaviour
     private void Start()
     {
         CreateQueue();
+
+        Boss.HPtext.text = "HP:" + Boss.Hp.ToString() + "/" + Boss.maxHp.ToString();
 
         StartCoroutine(AttackFlow());
     }
