@@ -6,6 +6,11 @@ using UnityEngine.UIElements;
 
 public class CharPoison : MonoBehaviour, IBaseActions
 {
+
+    public Animator myAnimator;
+    public const string DAMAGE_ANIM = "take_damage";
+    public const string HEAL_ANIM = "heals";
+
     public int Hp = 30;
     public int maxHp = 30;
     public int phantomHp = 0;
@@ -26,8 +31,14 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public TextMeshProUGUI SpText;
     [SerializeField] private RunGame GameData;
 
+    void Start()
+    {
+        myAnimator = GetComponent<Animator>();
+    }
+
     public void Attack()
     {
+        Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
         Boss.TakeDamage(AttackPower, false);
 
         if (SkillPoint < MaxSkillPoint)
@@ -59,6 +70,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
                 phantomHp = 0;
 
                 int effdamage = (int)(damage * percentDefence);
+                myAnimator.SetTrigger(DAMAGE_ANIM); 
                 Hp -= effdamage;
             }
             else
@@ -69,10 +81,14 @@ public class CharPoison : MonoBehaviour, IBaseActions
 
         else {
             int effdamage = (int)(damage * percentDefence);
+            myAnimator.SetTrigger(DAMAGE_ANIM);
             Hp -= effdamage;
         }
 
-        if (Hp <= 0 && revivePoint >= 1) { Hp = 20; revivePoint--; }
+        if (Hp <= 0 && revivePoint >= 1) {
+            myAnimator.SetTrigger(HEAL_ANIM);
+            Hp = 20; revivePoint--; 
+        }
 
         else if (Hp <= 0)
         {
@@ -120,6 +136,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
     {
         if (SkillPoint == 10)
         {
+            Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
             Boss.TakeDamage(Boss.Hp, true);
 
             isattacking = false;

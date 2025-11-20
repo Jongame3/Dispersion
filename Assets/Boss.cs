@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour, IBaseActions
 {
+    public Animator myAnimator;
+    public const string DAMAGE_ANIM = "take_damage";
+
     public int Hp = 10000;
     public int maxHp = 10000;
     public int AttackPower = 10;
@@ -22,16 +25,23 @@ public class Boss : MonoBehaviour, IBaseActions
     public bool isattacking = false;
     public TextMeshProUGUI HPtext;
 
+    void Start()
+    {
+        myAnimator = GetComponent<Animator>();
+    }
+
     public void Attack()
     {
         if (agr) {
             if (fireg.parryBool)
             {
+                fireg.myAnimator.SetTrigger(DAMAGE_ANIM);
                 Hp -= AttackPower;
                 fireg.parryBool = false;
             }
             else
             {
+                fireg.myAnimator.SetTrigger(DAMAGE_ANIM);
                 fireg.Hp -= AttackPower;
             }
 
@@ -39,9 +49,13 @@ public class Boss : MonoBehaviour, IBaseActions
         }
         else
         {
+            fox.myAnimator.SetTrigger(DAMAGE_ANIM);
             fox.TakeDamage(10, false);
+            yad.myAnimator.SetTrigger(DAMAGE_ANIM);
             yad.TakeDamage(10, false);
+            fireg.myAnimator.SetTrigger(DAMAGE_ANIM);
             fireg.TakeDamage(10, false);
+            jirai.myAnimator.SetTrigger(DAMAGE_ANIM);
             jirai.TakeDamage(10, false);
         }
     }
@@ -52,15 +66,18 @@ public class Boss : MonoBehaviour, IBaseActions
         {
             if (ignore == false)
             {
+                myAnimator.SetTrigger(DAMAGE_ANIM);
                 Hp -= (damage * (1 - Defense / 100));
             }
             else
             {
+                myAnimator.SetTrigger(DAMAGE_ANIM);
                 Hp -= damage;
             }
         }
         else
         {
+            myAnimator.SetTrigger(DAMAGE_ANIM);
             Hp -= damage;
             Hp -= 177 * timeOfBurningInHell;
             timeOfBurningInHell++;

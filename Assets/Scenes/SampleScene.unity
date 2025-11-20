@@ -1215,6 +1215,7 @@ GameObject:
   - component: {fileID: 167350947}
   - component: {fileID: 167350946}
   - component: {fileID: 167350948}
+  - component: {fileID: 167350949}
   m_Layer: 5
   m_Name: Fox
   m_TagString: Untagged
@@ -1292,6 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f2050e56417a942bc97fdaf41cce36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharKsiusha
+  myAnimator: {fileID: 0}
   Hp: 40
   maxHp: 40
   Defense: 30
@@ -1309,6 +1311,28 @@ MonoBehaviour:
   Text: {fileID: 1865095595}
   HPtext: {fileID: 49940595}
   SpText: {fileID: 1119232864}
+--- !u!95 &167350949
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167350944}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 81cd27c5e2ab135469a50388cce81a47, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &296054621 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5751179313233836631, guid: 1f15b7897f467a34fa6fcf1257a7672f, type: 3}
@@ -1343,6 +1367,7 @@ GameObject:
   - component: {fileID: 309013084}
   - component: {fileID: 309013083}
   - component: {fileID: 309013085}
+  - component: {fileID: 309013086}
   m_Layer: 5
   m_Name: jirai
   m_TagString: Untagged
@@ -1424,6 +1449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fccabbcfc1deb428a03aa24010a722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tsumatsu
+  myAnimator: {fileID: 0}
   Hp: 70
   maxHp: 70
   Defense: 30
@@ -1456,6 +1482,28 @@ MonoBehaviour:
   BaseSprite: {fileID: 7220972494032456933, guid: 1b3401a3cdb301340bdf17feb2d1f69c, type: 3}
   HPtext: {fileID: 1414450515}
   HPtext2: {fileID: 1706981918}
+--- !u!95 &309013086
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309013081}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c4fa6fd64fe614b46aae82ee10e276bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &374305979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3716,6 +3764,7 @@ GameObject:
   - component: {fileID: 1165730504}
   - component: {fileID: 1165730503}
   - component: {fileID: 1165730502}
+  - component: {fileID: 1165730505}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -3755,6 +3804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37e9a3e72587694b956fdfa20ccf548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
+  myAnimator: {fileID: 0}
   Hp: 10000
   maxHp: 10000
   AttackPower: 10
@@ -3808,6 +3858,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165730500}
   m_CullTransparentMesh: 1
+--- !u!95 &1165730505
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165730500}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d2766d64b373e064ba9c27dc64014fb5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1225516652
 GameObject:
   m_ObjectHideFlags: 0
@@ -4762,6 +4834,7 @@ GameObject:
   - component: {fileID: 1636341616}
   - component: {fileID: 1636341615}
   - component: {fileID: 1636341617}
+  - component: {fileID: 1636341618}
   m_Layer: 5
   m_Name: Poison
   m_TagString: Untagged
@@ -4839,6 +4912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d22f7737711d142abbdec3ec0372f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharPoison
+  myAnimator: {fileID: 0}
   Hp: 30
   maxHp: 30
   phantomHp: 0
@@ -4857,6 +4931,28 @@ MonoBehaviour:
   HPtext: {fileID: 2080828346}
   SpText: {fileID: 1585480062}
   GameData: {fileID: 1541098954}
+--- !u!95 &1636341618
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636341613}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c309771bfb889ca4ba0a9e0c4b21cc70, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1706981916
 GameObject:
   m_ObjectHideFlags: 0
@@ -5457,6 +5553,7 @@ GameObject:
   - component: {fileID: 1804956135}
   - component: {fileID: 1804956134}
   - component: {fileID: 1804956136}
+  - component: {fileID: 1804956137}
   m_Layer: 5
   m_Name: Nastya
   m_TagString: Untagged
@@ -5534,6 +5631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414cc6e75697a0b43b452e11e07598bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharNastya
+  myAnimator: {fileID: 0}
   Hp: 90
   maxHp: 90
   Defense: 30
@@ -5552,6 +5650,28 @@ MonoBehaviour:
   isattacking: 0
   HPtext: {fileID: 1111423215}
   SpText: {fileID: 2128646012}
+--- !u!95 &1804956137
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804956132}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 05c7a0a3c9e0062448394c96f0345361, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1864740639 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2047687589747318622, guid: 1f15b7897f467a34fa6fcf1257a7672f, type: 3}

@@ -7,6 +7,10 @@ using UnityEngine.UIElements;
 public class CharNastya : MonoBehaviour, IBaseActions
 {
 
+    public Animator myAnimator;
+    public const string DAMAGE_ANIM = "take_damage";
+    public const string HEAL_ANIM = "heals";
+
     public int Hp = 90;
     public int maxHp = 90;
     public float Defense = 40;
@@ -28,8 +32,14 @@ public class CharNastya : MonoBehaviour, IBaseActions
     public TextMeshProUGUI HPtext;
     public TextMeshProUGUI SpText;
 
+    void Start()
+    {
+        myAnimator = GetComponent<Animator>();
+    }
+
     public void Attack()
     {
+        Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
         Boss.TakeDamage((int)(AttackPower * (1+(maxHp/200))), false);
 
         if (SkillPoint < MaxSkillPoint)
@@ -48,6 +58,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
             float percentDefence = 1 - (Defense / 100);
 
             int effdamage = (int)(damage * percentDefence);
+            myAnimator.SetTrigger(DAMAGE_ANIM);
             Hp -= effdamage;
 
             if (jirai.DespairPoint < jirai.maxDespairPoint)
@@ -55,7 +66,10 @@ public class CharNastya : MonoBehaviour, IBaseActions
                 jirai.DespairPoint++;
             }
 
-            if (Hp <= 0 && revivePoint > 0) { Hp = maxHp / 2; }
+            if (Hp <= 0 && revivePoint > 0) {
+                myAnimator.SetTrigger(HEAL_ANIM);
+                Hp = maxHp / 2; 
+            }
 
             else if (Hp < 0)
             {
@@ -65,6 +79,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
         }
         else
         {
+            Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
             Boss.TakeDamage(damage, true);
         }
     }
@@ -121,6 +136,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
     {
         if (SkillPoint >= 3)
         {
+            Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
             Boss.TakeDamage(Boss.maxHp/10, false);
             StartCoroutine(disorientBuff(4));
             SkillPoint -= 3;
