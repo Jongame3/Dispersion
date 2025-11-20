@@ -7,12 +7,6 @@ using UnityEngine.UI;
 
 public class Tsumatsu : MonoBehaviour, IBaseActions
 {
-
-    public Animator myAnimator;
-    public const string DAMAGE_ANIM = "take_damage";
-    public const string HEAL_ANIM = "heals";
-
-
     public int Hp = 70;
     public int maxHp = 70;
     public float Defense = 30;
@@ -48,10 +42,6 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public TextMeshProUGUI HPtext;
     public TextMeshProUGUI HPtext2;
 
-    void Start()
-    {
-        myAnimator = GetComponent<Animator>();
-    }
 
     public void Attack()
     {
@@ -120,7 +110,6 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
     public void HealMe()
     {
-        myAnimator.SetTrigger(HEAL_ANIM);
         if (Hp <= maxHp - 20) Hp = Hp + 20;
         else Hp = maxHp;
         if (SkillPoint < MaxSkillPoint) {
@@ -132,7 +121,6 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     }
     public void HealMeanie()
     {
-        Meanie.myAnimator.SetTrigger(HEAL_ANIM);
         if (Meanie.Hp <= Meanie.maxHp - 20) Meanie.Hp = Meanie.Hp + 20;
         else Meanie.Hp = Meanie.maxHp;
 
@@ -146,7 +134,6 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     }
     public void HealReddie()
     {
-        Reddie.myAnimator.SetTrigger(HEAL_ANIM);
         if (Reddie.Hp <= Reddie.maxHp - 20) Reddie.Hp = Reddie.Hp + 20;
         else Reddie.Hp = Reddie.maxHp;
 
@@ -160,7 +147,6 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     }
     public void HealSnake()
     {
-        Snake.myAnimator.SetTrigger(HEAL_ANIM);
         if (Snake.Hp <= Snake.maxHp - 20) Snake.Hp = Snake.Hp + 20;
         else Snake.Hp = Snake.maxHp;
 
@@ -179,12 +165,10 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         float percentDefence = 1 - (Defense / 100);
 
         int effdamage = (int)(damage * percentDefence);
-        myAnimator.SetTrigger(DAMAGE_ANIM);
         Hp -= effdamage;
 
         if (Hp <= 0 && revivePoint > 0)
         {
-            myAnimator.SetTrigger(HEAL_ANIM);
             Hp = maxHp / 2;
             revivePoint--;
         }
@@ -326,17 +310,12 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         if (SkillPoint >= 2)
         {
-            Meanie.myAnimator.SetTrigger(HEAL_ANIM);
             Meanie.Hp += 50;
             if (Meanie.Hp > Meanie.maxHp) Meanie.Hp = Meanie.maxHp;
-            Reddie.myAnimator.SetTrigger(HEAL_ANIM);
             Reddie.Hp += 50;
             if (Reddie.Hp > Reddie.maxHp) Reddie.Hp = Reddie.maxHp;
-            Snake.myAnimator.SetTrigger(HEAL_ANIM);
             Snake.Hp += 50;
             if (Snake.Hp > Meanie.maxHp) Snake.Hp = Meanie.maxHp;
-
-            myAnimator.SetTrigger(HEAL_ANIM);
             Hp += 50;
             if (Hp > maxHp) Hp = maxHp;
 
@@ -418,17 +397,14 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         if (DespairPoint >= 2)
         {
-            Meanie.myAnimator.SetTrigger(DAMAGE_ANIM);
             Meanie.TakeDamage(Meanie.Hp, false);
             StartCoroutine(BuffATKMeanie(2, 30));
             StartCoroutine(BuffDEFMeanie(2, 30));
             StartCoroutine(BuffSPDMeanie(2, 30));
-            Reddie.myAnimator.SetTrigger(DAMAGE_ANIM);
             Reddie.TakeDamage(Reddie.Hp, false);
             StartCoroutine(BuffATKReddie(2, 30));
             StartCoroutine(BuffDEFReddie(2, 30));
             StartCoroutine(BuffSPDReddie(2, 30));
-            Snake.myAnimator.SetTrigger(DAMAGE_ANIM);
             Snake.TakeDamage(Snake.Hp, false);
             StartCoroutine(BuffATKSnake(2, 30));
             StartCoroutine(BuffDEFSnake(2, 30));
@@ -451,9 +427,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         {
             int damage = ((Meanie.AttackPower + Reddie.AttackPower + Snake.AttackPower) * DespairPoint); // Dividing is under a queastion....
 
-            myAnimator.SetTrigger(DAMAGE_ANIM);
             TakeDamage(Hp, false);
-            Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
             Boss.TakeDamage(damage, false);
             StartCoroutine(hellFireToBoss(2));
             Meanie.TakeDamage(Meanie.Hp, false);

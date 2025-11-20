@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class CharKsiusha : MonoBehaviour, IBaseActions
 {
-
-    public Animator myAnimator;
-    public const string DAMAGE_ANIM = "take_damage";
-    public const string HEAL_ANIM = "heals";
-
     public int Hp = 40;
     public int maxHp = 40;
     public float Defense = 30;
@@ -31,14 +26,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     public TextMeshProUGUI HPtext;
     public TextMeshProUGUI SpText;
 
-    void Start()
-    {
-        myAnimator = GetComponent<Animator>();
-    }
-
     public void Attack()
     {
-        Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
         Boss.TakeDamage(AttackPower, false);
         SkillPoint++;
 
@@ -56,7 +45,6 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         float percentDefence = 1 - (Defense / 100);
 
         int effdamage = (int)(damage * percentDefence);
-        myAnimator.SetTrigger(DAMAGE_ANIM);
         Hp -= effdamage;
 
         if (jirai.DespairPoint < jirai.maxDespairPoint)
@@ -64,10 +52,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
             jirai.DespairPoint++;
         }
 
-        if (Hp <= 0 && revivePoint > 0) {
-            myAnimator.SetTrigger(HEAL_ANIM);
-            Hp = maxHp/2; 
-        }
+        if (Hp <= 0 && revivePoint > 0) { Hp = maxHp/2; }
         else if (Hp < 0) 
         {
             Alive = false;
@@ -112,7 +97,6 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     {
         if (SkillPoint >= 1)
         {
-            Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
             Boss.TakeDamage(AttackPower, false) ;
             Hp += 10;
             SkillPoint -= 1;
@@ -148,12 +132,10 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         {
             float modifier = 1 + (1*(Speed/100));
 
-            Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
             Boss.TakeDamage((int)(AttackPower * modifier), false);
 
             modifier = (float) (1.5 + (1.5 * (Speed / 100)));
 
-            Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
             Boss.TakeDamage((int)(AttackPower * modifier), false);
             SkillPoint -= 3;
 
@@ -171,7 +153,6 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         if (SkillPoint >= 4)
         {
             float modifier = 6;
-            Boss.myAnimator.SetTrigger(DAMAGE_ANIM);
             Boss.TakeDamage((int)(AttackPower * modifier), true);
             SkillPoint -= 4;
 
