@@ -25,6 +25,12 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     [SerializeField] private CharNastya Reddie;
     [SerializeField] private CharPoison Snake;
     [SerializeField] private RunGame GameData;
+
+    [SerializeField] private PoisonFrame PoisonFrame;
+    [SerializeField] private FoxFrame FoxFrame;
+    [SerializeField] private jiraiFrame jiraiFrame;
+    [SerializeField] private NastyaFrame NastyaFrame;
+
     public GameObject BattleHud;
     public GameObject DespairHud;
     public GameObject HealUI;
@@ -110,6 +116,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
     public void HealMe()
     {
+        jiraiFrame.myAnimator.SetTrigger("heal");
         if (Hp <= maxHp - 20) Hp = Hp + 20;
         else Hp = maxHp;
         if (SkillPoint < MaxSkillPoint) {
@@ -121,6 +128,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     }
     public void HealMeanie()
     {
+        FoxFrame.myAnimator.SetTrigger("heal");
         if (Meanie.Hp <= Meanie.maxHp - 20) Meanie.Hp = Meanie.Hp + 20;
         else Meanie.Hp = Meanie.maxHp;
 
@@ -134,6 +142,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     }
     public void HealReddie()
     {
+        NastyaFrame.myAnimator.SetTrigger("heal");
         if (Reddie.Hp <= Reddie.maxHp - 20) Reddie.Hp = Reddie.Hp + 20;
         else Reddie.Hp = Reddie.maxHp;
 
@@ -147,6 +156,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     }
     public void HealSnake()
     {
+        PoisonFrame.myAnimator.SetTrigger("heal");
         if (Snake.Hp <= Snake.maxHp - 20) Snake.Hp = Snake.Hp + 20;
         else Snake.Hp = Snake.maxHp;
 
@@ -165,6 +175,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         float percentDefence = 1 - (Defense / 100);
 
         int effdamage = (int)(damage * percentDefence);
+        jiraiFrame.myAnimator.SetTrigger("take_damage");
         Hp -= effdamage;
 
         if (Hp <= 0 && revivePoint > 0)
@@ -310,12 +321,16 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         if (SkillPoint >= 2)
         {
+            FoxFrame.myAnimator.SetTrigger("heal");
             Meanie.Hp += 50;
             if (Meanie.Hp > Meanie.maxHp) Meanie.Hp = Meanie.maxHp;
+            NastyaFrame.myAnimator.SetTrigger("heal");
             Reddie.Hp += 50;
             if (Reddie.Hp > Reddie.maxHp) Reddie.Hp = Reddie.maxHp;
+            PoisonFrame.myAnimator.SetTrigger("heal");
             Snake.Hp += 50;
             if (Snake.Hp > Meanie.maxHp) Snake.Hp = Meanie.maxHp;
+            jiraiFrame.myAnimator.SetTrigger("heal");
             Hp += 50;
             if (Hp > maxHp) Hp = maxHp;
 

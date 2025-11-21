@@ -23,6 +23,9 @@ public class CharNastya : MonoBehaviour, IBaseActions
     [SerializeField] private RunGame GameData;
     [SerializeField] private Tsumatsu jirai;
     [SerializeField] private Boss Boss;
+
+    [SerializeField] private NastyaFrame NastyaFrame;
+
     public GameObject BattleHud;
     public bool isattacking = false;
     public TextMeshProUGUI HPtext;
@@ -48,6 +51,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
             float percentDefence = 1 - (Defense / 100);
 
             int effdamage = (int)(damage * percentDefence);
+            NastyaFrame.myAnimator.SetTrigger("take_damage");
             Hp -= effdamage;
 
             if (jirai.DespairPoint < jirai.maxDespairPoint)

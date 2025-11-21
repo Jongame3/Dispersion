@@ -20,6 +20,9 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     [SerializeField] private Boss Boss;
     [SerializeField] private Tsumatsu jirai;
     [SerializeField] private RunGame GameData;
+
+    [SerializeField] private FoxFrame FoxFrame;
+
     public GameObject BattleHud;
     public bool isattacking = false;
     public TextMeshProUGUI Text;
@@ -45,6 +48,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         float percentDefence = 1 - (Defense / 100);
 
         int effdamage = (int)(damage * percentDefence);
+        FoxFrame.myAnimator.SetTrigger("take_damage");
         Hp -= effdamage;
 
         if (jirai.DespairPoint < jirai.maxDespairPoint)
@@ -52,7 +56,9 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
             jirai.DespairPoint++;
         }
 
-        if (Hp <= 0 && revivePoint > 0) { Hp = maxHp/2; }
+        if (Hp <= 0 && revivePoint > 0) { 
+            Hp = maxHp/2; 
+        }
         else if (Hp < 0) 
         {
             Alive = false;

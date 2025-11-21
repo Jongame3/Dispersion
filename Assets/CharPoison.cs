@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class CharPoison : MonoBehaviour, IBaseActions
 {
+    public Animator myAnimator;
+
     public int Hp = 30;
     public int maxHp = 30;
     public int phantomHp = 0;
@@ -19,6 +21,8 @@ public class CharPoison : MonoBehaviour, IBaseActions
 
     [SerializeField] private Boss Boss;
     [SerializeField] private Tsumatsu jirai;
+    [SerializeField] private PoisonFrame PoisonFrame;
+
     public GameObject BattleHud;
     public bool isattacking = false;
     public TextMeshProUGUI Text;
@@ -59,20 +63,27 @@ public class CharPoison : MonoBehaviour, IBaseActions
                 phantomHp = 0;
 
                 int effdamage = (int)(damage * percentDefence);
+                PoisonFrame.myAnimator.SetTrigger("take_damage");
                 Hp -= effdamage;
             }
             else
             {
+                PoisonFrame.myAnimator.SetTrigger("take_damage");
                 phantomHp -= damage;
             }
         }
 
         else {
             int effdamage = (int)(damage * percentDefence);
+            PoisonFrame.myAnimator.SetTrigger("take_damage");
             Hp -= effdamage;
         }
 
-        if (Hp <= 0 && revivePoint >= 1) { Hp = 20; revivePoint--; }
+        if (Hp <= 0 && revivePoint >= 1) { 
+            
+            Hp = 20; 
+            revivePoint--; 
+        }
 
         else if (Hp <= 0)
         {

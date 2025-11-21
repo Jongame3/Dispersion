@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class Boss : MonoBehaviour, IBaseActions
 {
@@ -19,6 +20,9 @@ public class Boss : MonoBehaviour, IBaseActions
     [SerializeField] private CharPoison yad;
     [SerializeField] private CharNastya fireg;
     [SerializeField] private Tsumatsu jirai;
+
+    [SerializeField] private BossFrame BossFrame;
+
     public bool isattacking = false;
     public TextMeshProUGUI HPtext;
 
@@ -52,6 +56,7 @@ public class Boss : MonoBehaviour, IBaseActions
         {
             if (ignore == false)
             {
+                BossFrame.myAnimator.SetTrigger("take_damage");
                 Hp -= (damage * (1 - Defense / 100));
             }
             else
@@ -61,6 +66,7 @@ public class Boss : MonoBehaviour, IBaseActions
         }
         else
         {
+            BossFrame.myAnimator.SetTrigger("take_damage");
             Hp -= damage;
             Hp -= 177 * timeOfBurningInHell;
             timeOfBurningInHell++;
