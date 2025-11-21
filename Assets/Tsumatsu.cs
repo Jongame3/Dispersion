@@ -83,9 +83,13 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public void Defence()
     {
         StartCoroutine(BuffDEFMe(1, 15));
-        if (SkillPoint < MaxSkillPoint)
+        if (SkillPoint + 2 < MaxSkillPoint)
         {
             SkillPoint += 2;
+        }
+        else
+        {
+            SkillPoint = MaxSkillPoint;
         }
         isattacking = false;
     }
@@ -174,6 +178,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         float percentDefence = 1 - (Defense / 100);
 
+        if (ignore) percentDefence = 1;
+
         int effdamage = (int)(damage * percentDefence);
         jiraiFrame.myAnimator.SetTrigger("take_damage");
         Hp -= effdamage;
@@ -182,9 +188,10 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         {
             Hp = maxHp / 2;
             revivePoint--;
+            if (!Alive) Alive = true;
         }
 
-        else if (Hp < 0)
+        else if (Hp <= 0)
         {
             Alive = false;
         }
@@ -412,15 +419,15 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         if (DespairPoint >= 2)
         {
-            Meanie.TakeDamage(Meanie.Hp, false);
+            Meanie.TakeDamage(Meanie.Hp, true);
             StartCoroutine(BuffATKMeanie(2, 30));
             StartCoroutine(BuffDEFMeanie(2, 30));
             StartCoroutine(BuffSPDMeanie(2, 30));
-            Reddie.TakeDamage(Reddie.Hp, false);
+            Reddie.TakeDamage(Reddie.Hp, true);
             StartCoroutine(BuffATKReddie(2, 30));
             StartCoroutine(BuffDEFReddie(2, 30));
             StartCoroutine(BuffSPDReddie(2, 30));
-            Snake.TakeDamage(Snake.Hp, false);
+            Snake.TakeDamage(Snake.Hp, true);
             StartCoroutine(BuffATKSnake(2, 30));
             StartCoroutine(BuffDEFSnake(2, 30));
             StartCoroutine(BuffSPDSnake(2, 30));
@@ -442,12 +449,12 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         {
             int damage = ((Meanie.AttackPower + Reddie.AttackPower + Snake.AttackPower) * DespairPoint); // Dividing is under a queastion....
 
-            TakeDamage(Hp, false);
-            Boss.TakeDamage(damage, false);
+            TakeDamage(Hp, true);
+            Boss.TakeDamage(damage, true);
             StartCoroutine(hellFireToBoss(2));
-            Meanie.TakeDamage(Meanie.Hp, false);
-            Reddie.TakeDamage(Reddie.Hp, false);
-            Snake.TakeDamage(Snake.Hp, false);
+            Meanie.TakeDamage(Meanie.Hp, true);
+            Reddie.TakeDamage(Reddie.Hp, true);
+            Snake.TakeDamage(Snake.Hp, true);
 
             DespairPoint = 0;
 

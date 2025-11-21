@@ -31,12 +31,12 @@ public class Boss : MonoBehaviour, IBaseActions
         if (agr) {
             if (fireg.parryBool)
             {
-                Hp -= AttackPower;
+                TakeDamage(AttackPower, true);
                 fireg.parryBool = false;
             }
             else
             {
-                fireg.Hp -= AttackPower;
+                fireg.TakeDamage(AttackPower, false);
             }
 
             isattacking = false;
@@ -72,7 +72,7 @@ public class Boss : MonoBehaviour, IBaseActions
             timeOfBurningInHell++;
         }
 
-        if (Hp < 0)
+        if (Hp <= 0)
         {
             alive = false;
         }

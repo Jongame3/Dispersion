@@ -40,12 +40,14 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
     public void TakeDamage (int damage, bool ignore)
     {
-        if (evade){
+        if (evade && !ignore){
             evade = false; 
             return; 
         }
 
         float percentDefence = 1 - (Defense / 100);
+
+        if (ignore) percentDefence = 1;
 
         int effdamage = (int)(damage * percentDefence);
         FoxFrame.myAnimator.SetTrigger("take_damage");
@@ -57,9 +59,11 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         }
 
         if (Hp <= 0 && revivePoint > 0) { 
-            Hp = maxHp/2; 
+            Hp = maxHp/2;
+            revivePoint--;
+            if (!Alive) Alive = true;
         }
-        else if (Hp < 0) 
+        else if (Hp <= 0) 
         {
             Alive = false;
         }
@@ -69,12 +73,16 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     public void Def()
     {
         StartCoroutine(BuffDEF(1, 1.5f));
-        if (SkillPoint < MaxSkillPoint)
+        if (SkillPoint + 2 < MaxSkillPoint)
         {
             SkillPoint += 2;
         }
+        else
+        {
+            SkillPoint = MaxSkillPoint;
+        }
 
-        isattacking = false;
+            isattacking = false;
     }
 
     private IEnumerator BuffATK(uint rounds, float multiplier)

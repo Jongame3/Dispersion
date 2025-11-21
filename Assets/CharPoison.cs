@@ -17,7 +17,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public int SkillPoint = 0;
     public int MaxSkillPoint = 10;
     public float Defense = 40;
-    [SerializeField]  bool Alive = true;
+    public  bool Alive = true;
 
     [SerializeField] private Boss Boss;
     [SerializeField] private Tsumatsu jirai;
@@ -44,9 +44,13 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public void Defence()
     {
         StartCoroutine(BuffDEF(1, 1.5f));
-        if (SkillPoint < MaxSkillPoint)
+        if (SkillPoint + 2 < MaxSkillPoint)
         {
             SkillPoint += 2;
+        }
+        else
+        {
+            SkillPoint = MaxSkillPoint;
         }
         isattacking = false;
     }
@@ -54,6 +58,8 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public void TakeDamage(int damage, bool ignore)
     {
         float percentDefence = 1 - (Defense / 100);
+
+        if(ignore) percentDefence = 1;
 
         if (phantomHp != 0)
         {
@@ -82,7 +88,8 @@ public class CharPoison : MonoBehaviour, IBaseActions
         if (Hp <= 0 && revivePoint >= 1) { 
             
             Hp = 20; 
-            revivePoint--; 
+            revivePoint--;
+            if (!Alive) Alive = true;
         }
 
         else if (Hp <= 0)

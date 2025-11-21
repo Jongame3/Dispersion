@@ -50,6 +50,8 @@ public class CharNastya : MonoBehaviour, IBaseActions
         
             float percentDefence = 1 - (Defense / 100);
 
+            if (ignore) percentDefence = 1;
+
             int effdamage = (int)(damage * percentDefence);
             NastyaFrame.myAnimator.SetTrigger("take_damage");
             Hp -= effdamage;
@@ -59,9 +61,13 @@ public class CharNastya : MonoBehaviour, IBaseActions
                 jirai.DespairPoint++;
             }
 
-            if (Hp <= 0 && revivePoint > 0) { Hp = maxHp / 2; }
+            if (Hp <= 0 && revivePoint > 0) { 
+                Hp = maxHp / 2;
+                revivePoint--;
+                if (!Alive) Alive = true;
+            }
 
-            else if (Hp < 0)
+            else if (Hp <= 0)
             {
                 Alive = false;
             }
@@ -76,9 +82,13 @@ public class CharNastya : MonoBehaviour, IBaseActions
     public void Defence()
     {
         StartCoroutine(BuffDEF(1, 1.5f));
-        if (SkillPoint < MaxSkillPoint)
+        if (SkillPoint + 2 < MaxSkillPoint)
         {
             SkillPoint += 2;
+        }
+        else
+        {
+            SkillPoint = MaxSkillPoint;
         }
         isattacking = false;
     }

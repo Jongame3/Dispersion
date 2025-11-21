@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using UnityEditor.Analytics;
 
 public class RunGame : MonoBehaviour
 {
@@ -13,15 +14,53 @@ public class RunGame : MonoBehaviour
     [SerializeField] private Tsumatsu jirai;
     [SerializeField] private Boss Boss;
 
+    void EndGameDefeat()
+    {
+        Debug.Log("Someone died! Game Over.");
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    bool GetAliveStatus(string name)
+    {
+        switch (name)
+        {
+            case "FOX": return fox.Alive;
+            case "POISON": return yad.Alive;
+            case "KANDZIO": return fireg.Alive;
+            case "TSUMATSU": return jirai.Alive;
+        }
+        return false;
+    }
+
+
     Queue<string> actionqueue = new Queue<string>();
 
     private IEnumerator AttackFlow()
     {
         while (Boss.alive)
         {
+            if (!jirai.Alive && !yad.Alive && !fireg.Alive && !fox.Alive)
+            {
+                EndGameDefeat();
+                yield break; 
+                
+            }
+
+            if (!GetAliveStatus(actionqueue.Peek()))
+            {
+                EndGameDefeat();
+                yield break;
+            }
+
+
             for (int i = 0; i < 4; i++)
             {
-                if (actionqueue.Peek() == "TSUMATSU")
+                if (actionqueue.Peek() == "TSUMATSU" && jirai.Alive)
                 {
                     if (jirai.DespairMode == false) {
                         jirai.BattleHud.SetActive(true);
@@ -59,7 +98,7 @@ public class RunGame : MonoBehaviour
                     continue;
                 }
 
-                if (actionqueue.Peek() == "FOX")
+                if (actionqueue.Peek() == "FOX" && fox.Alive)
                 {
                     fox.BattleHud.SetActive(true);
 
@@ -77,7 +116,7 @@ public class RunGame : MonoBehaviour
                 }
 
 
-                if (actionqueue.Peek() == "KANDZIO")
+                if (actionqueue.Peek() == "KANDZIO" && fireg.Alive)
                 {
                     fireg.BattleHud.SetActive(true);
 
@@ -95,7 +134,7 @@ public class RunGame : MonoBehaviour
                 }
 
 
-                if (actionqueue.Peek() == "POISON")
+                if (actionqueue.Peek() == "POISON" && yad.Alive)
                 {
                     yad.BattleHud.SetActive(true);
 
@@ -118,6 +157,7 @@ public class RunGame : MonoBehaviour
             Boss.Attack();
             RoundCount++;
 
+            actionqueue.Clear();
             CreateQueue();
         }
     }
