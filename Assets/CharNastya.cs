@@ -18,7 +18,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
     public bool parryBool = false;
     public TextMeshProUGUI Text;
 
-    public int revivePoint = 0;
+    public uint revivePoint = 0;
 
     [SerializeField] private RunGame GameData;
     [SerializeField] private Tsumatsu jirai;
@@ -61,13 +61,13 @@ public class CharNastya : MonoBehaviour, IBaseActions
                 jirai.DespairPoint++;
             }
 
-            if (Hp <= 0 && revivePoint > 0) { 
+            if (Hp <= 0 && revivePoint > 0)
+            {
                 Hp = maxHp / 2;
                 revivePoint--;
-                if (!Alive) Alive = true;
+                Alive = true;
             }
-
-            else if (Hp <= 0)
+            else if (Hp <= 0 && revivePoint == 0)
             {
                 Alive = false;
             }

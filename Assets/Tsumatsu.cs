@@ -16,7 +16,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public int MaxSkillPoint = 10;
     public int DespairPoint = 0;
     public int maxDespairPoint = 7;
-    public int revivePoint = 0;
+    public uint revivePoint = 0;
     public bool Alive = true;
 
 
@@ -188,10 +188,9 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         {
             Hp = maxHp / 2;
             revivePoint--;
-            if (!Alive) Alive = true;
+            Alive = true;
         }
-
-        else if (Hp <= 0)
+        else if (Hp <= 0 && revivePoint == 0)
         {
             Alive = false;
         }

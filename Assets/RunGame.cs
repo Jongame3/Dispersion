@@ -51,11 +51,11 @@ public class RunGame : MonoBehaviour
                 
             }
 
-            if (!GetAliveStatus(actionqueue.Peek()))
-            {
-                EndGameDefeat();
-                yield break;
-            }
+            //if (GetAliveStatus(actionqueue.Peek()))
+            //{
+            //    EndGameDefeat();
+            //    yield break;
+            //}
 
 
             for (int i = 0; i < 4; i++)

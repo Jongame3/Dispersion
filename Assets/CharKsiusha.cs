@@ -15,7 +15,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     bool evade = false;
     public bool Alive = true;
 
-    public int revivePoint = 0;
+    public uint revivePoint = 0;
 
     [SerializeField] private Boss Boss;
     [SerializeField] private Tsumatsu jirai;
@@ -61,9 +61,9 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         if (Hp <= 0 && revivePoint > 0) { 
             Hp = maxHp/2;
             revivePoint--;
-            if (!Alive) Alive = true;
+            Alive = true;
         }
-        else if (Hp <= 0) 
+        else if (Hp <= 0 && revivePoint == 0) 
         {
             Alive = false;
         }
