@@ -29,9 +29,9 @@ public class RunGame : MonoBehaviour
 
     private IEnumerator AttackFlow()
     {
-        while (Boss.alive || RoundCount <= 30)
+        while (Boss.alive && RoundCount <= 30)
         {
-            if (!jirai.Alive && !yad.Alive && !fireg.Alive && !fox.Alive)
+            if (!jirai.Alive || !yad.Alive || !fireg.Alive || !fox.Alive)
             {
                 EndGameDefeat();
                 yield break; 
@@ -77,7 +77,7 @@ public class RunGame : MonoBehaviour
                         actionqueue.Dequeue();
                     }
                     continue;
-                }
+                } 
 
                 if (actionqueue.Peek() == "FOX" && fox.Alive)
                 {
@@ -95,6 +95,7 @@ public class RunGame : MonoBehaviour
 
                     continue;
                 }
+                
 
 
                 if (actionqueue.Peek() == "KANDZIO" && fireg.Alive)
@@ -113,6 +114,7 @@ public class RunGame : MonoBehaviour
 
                     continue;
                 }
+                
 
 
                 if (actionqueue.Peek() == "POISON" && yad.Alive)
@@ -131,6 +133,7 @@ public class RunGame : MonoBehaviour
                     continue;
 
                 }
+                
 
             }
 
@@ -152,25 +155,25 @@ public class RunGame : MonoBehaviour
             string maxName = "k";
             ;
 
-            if (maxSpeed < fox.Speed && !actionqueue.Contains("FOX"))
+            if (fox.Alive && maxSpeed < fox.Speed && !actionqueue.Contains("FOX"))
             {
                 maxSpeed = fox.Speed;
                 maxName = "FOX";
             }
 
-            if (maxSpeed < fireg.Speed && !actionqueue.Contains("KANDZIO"))
+            if (fireg.Alive && maxSpeed < fireg.Speed && !actionqueue.Contains("KANDZIO"))
             {
                 maxSpeed = fireg.Speed;
                 maxName = "KANDZIO";
             }
 
-            if (maxSpeed < jirai.Speed && !actionqueue.Contains("TSUMATSU"))
+            if (jirai.Alive && maxSpeed < jirai.Speed && !actionqueue.Contains("TSUMATSU"))
             {
                 maxSpeed = jirai.Speed;
                 maxName = "TSUMATSU";
             }
 
-            if (maxSpeed < yad.Speed && !actionqueue.Contains("POISON"))
+            if (yad.Alive && maxSpeed < yad.Speed && !actionqueue.Contains("POISON"))
             {
                 maxSpeed = yad.Speed;
                 maxName = "POISON";

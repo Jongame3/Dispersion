@@ -31,7 +31,8 @@ public class Boss : MonoBehaviour, IBaseActions
         if (agr) {
             if (fireg.parryBool)
             {
-                TakeDamage(AttackPower, true);
+                TakeDamage(AttackPower * 4, true);
+                fireg.attackCounter += AttackPower * 4;
                 fireg.parryBool = false;
             }
             else
@@ -43,10 +44,18 @@ public class Boss : MonoBehaviour, IBaseActions
         }
         else
         {
-            fox.TakeDamage(10, false);
-            yad.TakeDamage(10, false);
-            fireg.TakeDamage(10, false);
-            jirai.TakeDamage(10, false);
+            if (fireg.parryBool)
+            {
+                TakeDamage(AttackPower * 4, true);
+                fireg.attackCounter += AttackPower * 4;
+                fireg.parryBool = false;
+
+            } else { 
+                fox.TakeDamage(10, false);
+                yad.TakeDamage(10, false);
+                fireg.TakeDamage(10, false);
+                jirai.TakeDamage(10, false);
+            }
         }
     }
 
@@ -61,6 +70,7 @@ public class Boss : MonoBehaviour, IBaseActions
             }
             else
             {
+                BossFrame.myAnimator.SetTrigger("take_damage");
                 Hp -= damage;
             }
         }
