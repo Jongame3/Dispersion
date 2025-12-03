@@ -25,24 +25,11 @@ public class RunGame : MonoBehaviour
 #endif
     }
 
-    bool GetAliveStatus(string name)
-    {
-        switch (name)
-        {
-            case "FOX": return fox.Alive;
-            case "POISON": return yad.Alive;
-            case "KANDZIO": return fireg.Alive;
-            case "TSUMATSU": return jirai.Alive;
-        }
-        return false;
-    }
-
-
     Queue<string> actionqueue = new Queue<string>();
 
     private IEnumerator AttackFlow()
     {
-        while (Boss.alive)
+        while (Boss.alive || RoundCount <= 30)
         {
             if (!jirai.Alive && !yad.Alive && !fireg.Alive && !fox.Alive)
             {
@@ -50,12 +37,6 @@ public class RunGame : MonoBehaviour
                 yield break; 
                 
             }
-
-            //if (GetAliveStatus(actionqueue.Peek()))
-            //{
-            //    EndGameDefeat();
-            //    yield break;
-            //}
 
 
             for (int i = 0; i < 4; i++)

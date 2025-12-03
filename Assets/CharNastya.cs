@@ -17,6 +17,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
     public bool Alive = true;
     public bool parryBool = false;
     public TextMeshProUGUI Text;
+    public float attackCounter = 0;
 
     public uint revivePoint = 0;
 
@@ -34,6 +35,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
     public void Attack()
     {
         Boss.TakeDamage((int)(AttackPower * (1+(maxHp/200))), false);
+        attackCounter += (((int)(AttackPower * (1 + (maxHp / 200)))) * (1 - Boss.Defense / 100));
 
         if (SkillPoint < MaxSkillPoint)
         {
@@ -136,6 +138,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
         if (SkillPoint >= 3)
         {
             Boss.TakeDamage(Boss.maxHp/10, false);
+            attackCounter += (Boss.maxHp / 10) * (1 - Boss.Defense / 100);
             StartCoroutine(disorientBuff(4));
             SkillPoint -= 3;
 

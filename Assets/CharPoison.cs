@@ -18,6 +18,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public int MaxSkillPoint = 10;
     public float Defense = 40;
     public  bool Alive = true;
+    public float attackCounter = 0;
 
     [SerializeField] private Boss Boss;
     [SerializeField] private Tsumatsu jirai;
@@ -33,6 +34,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public void Attack()
     {
         Boss.TakeDamage(AttackPower, false);
+        attackCounter += (AttackPower * (1 - Boss.Defense / 100));
 
         if (SkillPoint < MaxSkillPoint)
         {
@@ -138,6 +140,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
         if (SkillPoint == 10)
         {
             Boss.TakeDamage(Boss.Hp, true);
+            attackCounter += Boss.Hp;
 
             isattacking = false;
         }

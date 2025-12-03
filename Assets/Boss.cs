@@ -69,6 +69,7 @@ public class Boss : MonoBehaviour, IBaseActions
             BossFrame.myAnimator.SetTrigger("take_damage");
             Hp -= damage;
             Hp -= 177 * timeOfBurningInHell;
+            jirai.attackCounter += 177 * timeOfBurningInHell;
             timeOfBurningInHell++;
         }
 

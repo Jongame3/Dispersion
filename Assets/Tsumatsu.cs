@@ -18,6 +18,8 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public int maxDespairPoint = 7;
     public uint revivePoint = 0;
     public bool Alive = true;
+    public float attackCounter = 0;
+    public float healCounter = 0;
 
 
     [SerializeField] private Boss Boss;
@@ -121,8 +123,16 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public void HealMe()
     {
         jiraiFrame.myAnimator.SetTrigger("heal");
-        if (Hp <= maxHp - 20) Hp = Hp + 20;
-        else Hp = maxHp;
+        if (Hp <= maxHp - 20)
+        {
+            Hp = Hp + 20;
+            healCounter += 20;
+        }
+        else
+        {
+            healCounter += maxHp - Hp;
+            Hp = maxHp;
+        }
         if (SkillPoint < MaxSkillPoint) {
             SkillPoint++;
         }
@@ -133,8 +143,17 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public void HealMeanie()
     {
         FoxFrame.myAnimator.SetTrigger("heal");
-        if (Meanie.Hp <= Meanie.maxHp - 20) Meanie.Hp = Meanie.Hp + 20;
-        else Meanie.Hp = Meanie.maxHp;
+        if (Meanie.Hp <= Meanie.maxHp - 20)
+        {
+            Meanie.Hp = Meanie.Hp + 20;
+            healCounter += 20;
+        }
+        else
+        {
+            healCounter += Meanie.maxHp - Meanie.Hp;
+            Meanie.Hp = Meanie.maxHp;
+
+        }
 
         if (SkillPoint < MaxSkillPoint)
         {
@@ -147,8 +166,16 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public void HealReddie()
     {
         NastyaFrame.myAnimator.SetTrigger("heal");
-        if (Reddie.Hp <= Reddie.maxHp - 20) Reddie.Hp = Reddie.Hp + 20;
-        else Reddie.Hp = Reddie.maxHp;
+        if (Reddie.Hp <= Reddie.maxHp - 20)
+        {
+            Reddie.Hp = Reddie.Hp + 20;
+            healCounter += 20;
+        }
+        else
+        {
+            healCounter += Reddie.maxHp - Reddie.Hp;
+            Reddie.Hp = Reddie.maxHp;
+        }
 
         if (SkillPoint < MaxSkillPoint)
         {
@@ -161,8 +188,16 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public void HealSnake()
     {
         PoisonFrame.myAnimator.SetTrigger("heal");
-        if (Snake.Hp <= Snake.maxHp - 20) Snake.Hp = Snake.Hp + 20;
-        else Snake.Hp = Snake.maxHp;
+        if (Snake.Hp <= Snake.maxHp - 20)
+        {
+            Snake.Hp = Snake.Hp + 20;
+            healCounter += 20;
+        }
+        else
+        {
+            healCounter += Snake.maxHp - Snake.Hp;
+            Snake.Hp = Snake.maxHp;
+        }
 
         if (SkillPoint < MaxSkillPoint)
         {
@@ -328,17 +363,49 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         if (SkillPoint >= 2)
         {
             FoxFrame.myAnimator.SetTrigger("heal");
-            Meanie.Hp += 50;
-            if (Meanie.Hp > Meanie.maxHp) Meanie.Hp = Meanie.maxHp;
+            if (Meanie.Hp <= Meanie.maxHp - 50)
+            {
+                Meanie.Hp = Meanie.Hp + 50;
+                healCounter += 50;
+            }
+            else
+            {
+                healCounter += Meanie.maxHp - Meanie.Hp;
+                Meanie.Hp = Meanie.maxHp;
+            }
             NastyaFrame.myAnimator.SetTrigger("heal");
-            Reddie.Hp += 50;
-            if (Reddie.Hp > Reddie.maxHp) Reddie.Hp = Reddie.maxHp;
+            if (Reddie.Hp <= Reddie.maxHp - 50)
+            {
+                Reddie.Hp = Reddie.Hp + 50;
+                healCounter += 50;
+            }
+            else
+            {
+                healCounter += Reddie.maxHp - Reddie.Hp;
+                Reddie.Hp = Reddie.maxHp;
+            }
             PoisonFrame.myAnimator.SetTrigger("heal");
-            Snake.Hp += 50;
-            if (Snake.Hp > Meanie.maxHp) Snake.Hp = Meanie.maxHp;
+            if (Snake.Hp <= Snake.maxHp - 50)
+            {
+                Snake.Hp = Snake.Hp + 50;
+                healCounter += 50;
+            }
+            else
+            {
+                healCounter += Snake.maxHp - Snake.Hp;
+                Snake.Hp = Snake.maxHp;
+            }
             jiraiFrame.myAnimator.SetTrigger("heal");
-            Hp += 50;
-            if (Hp > maxHp) Hp = maxHp;
+            if (Hp <= maxHp - 50)
+            {
+                Hp = Hp + 50;
+                healCounter += 50;
+            }
+            else
+            {
+                healCounter += maxHp - Hp;
+                Hp = maxHp;
+            }
 
             SkillPoint -= 2;
 
@@ -450,6 +517,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
             TakeDamage(Hp, true);
             Boss.TakeDamage(damage, true);
+            attackCounter += damage;
             StartCoroutine(hellFireToBoss(2));
             Meanie.TakeDamage(Meanie.Hp, true);
             Reddie.TakeDamage(Reddie.Hp, true);

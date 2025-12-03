@@ -14,6 +14,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     public int MaxSkillPoint = 10;
     bool evade = false;
     public bool Alive = true;
+    public float attackCounter = 0;
 
     public uint revivePoint = 0;
 
@@ -32,6 +33,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     public void Attack()
     {
         Boss.TakeDamage(AttackPower, false);
+        attackCounter += AttackPower * (1 - Boss.Defense / 100);
         SkillPoint++;
 
         isattacking = false;
@@ -112,6 +114,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         if (SkillPoint >= 1)
         {
             Boss.TakeDamage(AttackPower, false) ;
+            attackCounter += AttackPower * (1 - Boss.Defense / 100);
             Hp += 10;
             SkillPoint -= 1;
 
@@ -147,10 +150,13 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
             float modifier = 1 + (1*(Speed/100));
 
             Boss.TakeDamage((int)(AttackPower * modifier), false);
+            attackCounter += ((int)(AttackPower * modifier)) * (1 - Boss.Defense / 100);
 
             modifier = (float) (1.5 + (1.5 * (Speed / 100)));
 
             Boss.TakeDamage((int)(AttackPower * modifier), false);
+            attackCounter += ((int)(AttackPower * modifier)) * (1 - Boss.Defense / 100);
+
             SkillPoint -= 3;
 
             isattacking = false;
@@ -168,6 +174,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         {
             float modifier = 6;
             Boss.TakeDamage((int)(AttackPower * modifier), true);
+            attackCounter += ((int)(AttackPower * modifier)) * (1 - Boss.Defense / 100);
             SkillPoint -= 4;
 
             isattacking = false;
