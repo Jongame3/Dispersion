@@ -123,10 +123,10 @@ public class CharPoison : MonoBehaviour, IBaseActions
     }
     public void InjectionBeta()
     {
-        if (SkillPoint >= 3)
+        if (SkillPoint >= 2)
         {
             phantomHp += 30;
-            SkillPoint -= 3;
+            SkillPoint -= 2;
 
             isattacking = false;
         }
