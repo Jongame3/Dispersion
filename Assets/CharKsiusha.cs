@@ -115,8 +115,15 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         {
             Boss.TakeDamage(AttackPower, false) ;
             attackCounter += AttackPower * (1 - Boss.Defense / 100);
-            Hp += 10;
-            SkillPoint -= 1;
+            if(Hp < maxHp-10)
+            {
+                Hp += 10; 
+            }
+            else
+            {
+                Hp = maxHp;
+            }
+                SkillPoint -= 1;
 
             isattacking = false;
         }

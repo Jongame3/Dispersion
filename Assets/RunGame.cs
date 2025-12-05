@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using UnityEditor.Analytics;
+using TMPro;
 
 public class RunGame : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class RunGame : MonoBehaviour
     [SerializeField] private CharNastya fireg;
     [SerializeField] private Tsumatsu jirai;
     [SerializeField] private Boss Boss;
+    [SerializeField] private TextMeshProUGUI RoundText;
 
     void EndGameDefeat()
     {
@@ -37,7 +39,7 @@ public class RunGame : MonoBehaviour
                 yield break; 
                 
             }
-
+            RoundText.text = "Round Count: " + RoundCount.ToString() + " / 30";
 
             for (int i = 0; i < 4; i++)
             {
@@ -124,7 +126,7 @@ public class RunGame : MonoBehaviour
                     yad.isattacking = true;
 
                     yad.SpText.text = "Sp:" + yad.SkillPoint.ToString() + "/" + yad.MaxSkillPoint.ToString();
-                    yad.HPtext.text = "HP:" + yad.Hp.ToString() + "/" + yad.maxHp.ToString();
+                    yad.HPtext.text = "HP:" + (yad.Hp + yad.phantomHp).ToString() + "/" + yad.maxHp.ToString();
 
                     yield return new WaitUntil(() => yad.isattacking == false);
 
@@ -137,7 +139,6 @@ public class RunGame : MonoBehaviour
 
             }
 
-            Boss.HPtext.text = "HP:" + Boss.Hp.ToString() + "/" + Boss.maxHp.ToString();
             Boss.Attack();
             RoundCount++;
 
@@ -187,9 +188,8 @@ public class RunGame : MonoBehaviour
     private void Start()
     {
         CreateQueue();
-
-        Boss.HPtext.text = "HP:" + Boss.Hp.ToString() + "/" + Boss.maxHp.ToString();
-
+        Boss.Hpslide.maxValue = Boss.maxHp;
+        Boss.Hpslide.value = Boss.Hp;
         StartCoroutine(AttackFlow());
     }
 

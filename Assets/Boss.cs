@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class Boss : MonoBehaviour, IBaseActions
@@ -20,11 +21,11 @@ public class Boss : MonoBehaviour, IBaseActions
     [SerializeField] private CharPoison yad;
     [SerializeField] private CharNastya fireg;
     [SerializeField] private Tsumatsu jirai;
+    public Slider Hpslide;
 
     [SerializeField] private BossFrame BossFrame;
 
     public bool isattacking = false;
-    public TextMeshProUGUI HPtext;
 
     public void Attack()
     {
@@ -37,7 +38,7 @@ public class Boss : MonoBehaviour, IBaseActions
             }
             else
             {
-                fireg.TakeDamage(AttackPower, false);
+                fireg.TakeDamage(AttackPower * 4, false);
             }
 
             isattacking = false;
@@ -88,8 +89,7 @@ public class Boss : MonoBehaviour, IBaseActions
             alive = false;
         }
 
-        HPtext.text = "HP:" + Hp.ToString() + "/" + maxHp.ToString();
-
+        Hpslide.value = Hp;
     }
 
 }
