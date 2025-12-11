@@ -48,7 +48,7 @@ public class RunGame : MonoBehaviour
                 
             }
 
-            RoundText.text = "Round Count: " + RoundCount.ToString() + " / 30";
+            RoundText.text = "Раунд: " + RoundCount.ToString() + " / 30";
 
             for (int i = 0; i < 4; i++)
             {
