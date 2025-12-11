@@ -14,7 +14,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     public int MaxSkillPoint = 10;
     bool evade = false;
     public bool Alive = true;
-    public float attackCounter = 0;
+    public int attackCounter = 0;
+    public int evadecount = 0;
 
     public uint revivePoint = 0;
 
@@ -33,8 +34,14 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     public void Attack()
     {
         Boss.TakeDamage(AttackPower, false);
-        attackCounter += AttackPower * (1 - Boss.Defense / 100);
-        SkillPoint++;
+
+        float percentDefence = 1 - (Boss.Defense / 100);
+        attackCounter += (int)(AttackPower * percentDefence);
+
+        if (SkillPoint < MaxSkillPoint)
+        {
+            SkillPoint++;
+        }
 
         isattacking = false;
     }
@@ -42,8 +49,9 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
     public void TakeDamage (int damage, bool ignore)
     {
-        if (evade && !ignore){
-            evade = false; 
+        if (evade){
+            evade = false;
+            evadecount++;
             return; 
         }
 
@@ -114,8 +122,10 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         if (SkillPoint >= 1)
         {
             Boss.TakeDamage(AttackPower, false) ;
-            attackCounter += AttackPower * (1 - Boss.Defense / 100);
-            if(Hp < maxHp-10)
+
+            float percentDefence = 1 - (Boss.Defense / 100);
+            attackCounter += (int)(AttackPower * percentDefence);
+            if (Hp < maxHp-10)
             {
                 Hp += 10; 
             }
@@ -123,7 +133,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
             {
                 Hp = maxHp;
             }
-                SkillPoint -= 1;
+            FoxFrame.myAnimator.SetTrigger("heal");
+            SkillPoint -= 1;
 
             isattacking = false;
         }
@@ -157,12 +168,14 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
             float modifier = 1 + (1*(Speed/100));
 
             Boss.TakeDamage((int)(AttackPower * modifier), false);
-            attackCounter += ((int)(AttackPower * modifier)) * (1 - Boss.Defense / 100);
+            float percentDefence = 1 - (Boss.Defense / 100);
+
+            attackCounter += (int)(((int)(AttackPower * modifier)) * percentDefence);
 
             modifier = (float) (1.5 + (1.5 * (Speed / 100)));
 
             Boss.TakeDamage((int)(AttackPower * modifier), false);
-            attackCounter += ((int)(AttackPower * modifier)) * (1 - Boss.Defense / 100);
+            attackCounter += (int)(((int)(AttackPower * modifier)) * percentDefence);
 
             SkillPoint -= 3;
 
@@ -181,7 +194,8 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
         {
             float modifier = 6;
             Boss.TakeDamage((int)(AttackPower * modifier), true);
-            attackCounter += ((int)(AttackPower * modifier)) * (1 - Boss.Defense / 100);
+
+            attackCounter += ((int)(AttackPower * modifier));
             SkillPoint -= 4;
 
             isattacking = false;

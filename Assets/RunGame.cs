@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor.Analytics;
 using TMPro;
+using Unity.VisualScripting;
 
 public class RunGame : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class RunGame : MonoBehaviour
     [SerializeField] private Tsumatsu jirai;
     [SerializeField] private Boss Boss;
     [SerializeField] private TextMeshProUGUI RoundText;
+
+    [SerializeField] private GameObject EndScreen;
+
+    [SerializeField] private TextMeshProUGUI FoxEND;
+    [SerializeField] private TextMeshProUGUI JiraiEND;
+    [SerializeField] private TextMeshProUGUI KandzioEND;
+    [SerializeField] private TextMeshProUGUI PoisonEND;
 
     void EndGameDefeat()
     {
@@ -39,18 +47,19 @@ public class RunGame : MonoBehaviour
                 yield break; 
                 
             }
+
             RoundText.text = "Round Count: " + RoundCount.ToString() + " / 30";
 
             for (int i = 0; i < 4; i++)
             {
-                if (actionqueue.Peek() == "TSUMATSU" && jirai.Alive)
+                if (actionqueue.Peek() == "TSUMATSU" && jirai.Alive && Boss.alive)
                 {
                     if (jirai.DespairMode == false) {
                         jirai.BattleHud.SetActive(true);
 
-                        jirai.SPText.text = "Sp:" + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString();
-                        jirai.HPtext.text = "HP:" + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString();
-                        jirai.DPText.text = "DP:" + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
+                        jirai.SPText.text = "ОУ:" + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString();
+                        jirai.HPtext.text = "ОЗ:" + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString();
+                        jirai.DPText.text = "ОО:" + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
 
                         jirai.isattacking = true;
 
@@ -68,9 +77,9 @@ public class RunGame : MonoBehaviour
 
                         jirai.isattacking = true;
 
-                        jirai.SPText2.text = "Sp:" + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString();
-                        jirai.HPtext2.text = "HP:" + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString();
-                        jirai.DPText2.text = "DP:" + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
+                        jirai.SPText2.text = "ОУ:" + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString();
+                        jirai.HPtext2.text = "ОЗ:" + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString();
+                        jirai.DPText2.text = "ОО:" + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
 
 
                         yield return new WaitUntil(() => jirai.isattacking == false);
@@ -81,14 +90,14 @@ public class RunGame : MonoBehaviour
                     continue;
                 } 
 
-                if (actionqueue.Peek() == "FOX" && fox.Alive)
+                if (actionqueue.Peek() == "FOX" && fox.Alive && Boss.alive)
                 {
                     fox.BattleHud.SetActive(true);
 
                     fox.isattacking = true;
 
-                    fox.SpText.text = "Sp:" + fox.SkillPoint.ToString() + "/" + fox.MaxSkillPoint.ToString();
-                    fox.HPtext.text = "HP:" + fox.Hp.ToString() + "/" + fox.maxHp.ToString();
+                    fox.SpText.text = "ОУ:" + fox.SkillPoint.ToString() + "/" + fox.MaxSkillPoint.ToString();
+                    fox.HPtext.text = "ОЗ:" + fox.Hp.ToString() + "/" + fox.maxHp.ToString();
 
                     yield return new WaitUntil(() => fox.isattacking == false);
 
@@ -100,14 +109,14 @@ public class RunGame : MonoBehaviour
                 
 
 
-                if (actionqueue.Peek() == "KANDZIO" && fireg.Alive)
+                if (actionqueue.Peek() == "KANDZIO" && fireg.Alive && Boss.alive)
                 {
                     fireg.BattleHud.SetActive(true);
 
                     fireg.isattacking = true;
 
-                    fireg.SpText.text = "Sp:" + fireg.SkillPoint.ToString() + "/" + fireg.MaxSkillPoint.ToString();
-                    fireg.HPtext.text = "HP:" + fireg.Hp.ToString() + "/" + fireg.maxHp.ToString();
+                    fireg.SpText.text = "ОУ:" + fireg.SkillPoint.ToString() + "/" + fireg.MaxSkillPoint.ToString();
+                    fireg.HPtext.text = "ОЗ:" + fireg.Hp.ToString() + "/" + fireg.maxHp.ToString();
 
                     yield return new WaitUntil(() => fireg.isattacking == false);
 
@@ -119,14 +128,14 @@ public class RunGame : MonoBehaviour
                 
 
 
-                if (actionqueue.Peek() == "POISON" && yad.Alive)
+                if (actionqueue.Peek() == "POISON" && yad.Alive && Boss.alive)
                 {
                     yad.BattleHud.SetActive(true);
 
                     yad.isattacking = true;
 
-                    yad.SpText.text = "Sp:" + yad.SkillPoint.ToString() + "/" + yad.MaxSkillPoint.ToString();
-                    yad.HPtext.text = "HP:" + (yad.Hp + yad.phantomHp).ToString() + "/" + yad.maxHp.ToString();
+                    yad.SpText.text = "ОУ:" + yad.SkillPoint.ToString() + "/" + yad.MaxSkillPoint.ToString();
+                    yad.HPtext.text = "ОЗ:" + (yad.Hp + yad.phantomHp).ToString() + "/" + yad.maxHp.ToString();
 
                     yield return new WaitUntil(() => yad.isattacking == false);
 
@@ -145,6 +154,12 @@ public class RunGame : MonoBehaviour
             actionqueue.Clear();
             CreateQueue();
         }
+
+        EndScreen.SetActive(true);
+        FoxEND.text = "Нанесено урона: " + fox.attackCounter.ToString()+ "\r\nУвернулась от " + fox.evadecount.ToString() + " атак";
+        JiraiEND.text = "Нанесено урона: " + jirai.attackCounter.ToString()+ "\r\nИсцелено здоровья: " + jirai.healCounter.ToString() ;
+        KandzioEND.text = "Нанесено урона: " + fireg.attackCounter.ToString()+ "\r\nПолучено урона: " + fireg.Vpitano.ToString();
+        PoisonEND.text = "Нанесено урона: " + yad.attackCounter.ToString();
     }
 
     Queue<string> CreateQueue()

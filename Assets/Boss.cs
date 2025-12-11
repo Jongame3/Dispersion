@@ -10,7 +10,7 @@ public class Boss : MonoBehaviour, IBaseActions
     public int Hp = 10000;
     public int maxHp = 10000;
     public int AttackPower = 10;
-    public int Defense = 20;
+    public float Defense = 20;
     public bool HellFire = false;
     public bool agr = false;
     public bool disorientation = false;
@@ -67,7 +67,9 @@ public class Boss : MonoBehaviour, IBaseActions
             if (ignore == false)
             {
                 BossFrame.myAnimator.SetTrigger("take_damage");
-                Hp -= (damage * (1 - Defense / 100));
+                float percentDefence = 1 - (Defense / 100);
+                int effdamage = (int)(damage * percentDefence);
+                Hp -= effdamage;
             }
             else
             {
