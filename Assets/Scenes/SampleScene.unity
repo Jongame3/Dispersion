@@ -2509,7 +2509,7 @@ PrefabInstance:
       objectReference: {fileID: 309013085}
     - target: {fileID: 3640592099146057640, guid: 16888fc043b2fed48b4e341303c6c781, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DelusionMeanie
+      value: BackToFriendsMeanie
       objectReference: {fileID: 0}
     - target: {fileID: 5280912777571629490, guid: 16888fc043b2fed48b4e341303c6c781, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -8318,6 +8318,7 @@ MonoBehaviour:
   Text: {fileID: 1900538092}
   attackCounter: 0
   Vpitano: 0
+  agrCounter: 0
   revivePoint: 0
   GameData: {fileID: 1541098954}
   jirai: {fileID: 309013085}

@@ -21,7 +21,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
     public int Vpitano = 0;
     public int agrCounter = 0;
 
-    public uint revivePoint = 0;
+    public int revivePoint = 0;
 
     [SerializeField] private RunGame GameData;
     [SerializeField] private Tsumatsu jirai;
@@ -71,7 +71,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
                 jirai.DespairPoint++;
             }
 
-            if (Hp <= 0 && revivePoint > 0)
+            if (Hp <= 0 && revivePoint >= 1)
             {
                 Hp = maxHp / 2;
                 revivePoint--;

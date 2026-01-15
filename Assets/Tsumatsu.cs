@@ -16,7 +16,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     public int MaxSkillPoint = 10;
     public int DespairPoint = 0;
     public int maxDespairPoint = 7;
-    public uint revivePoint = 0;
+    public int revivePoint = 0;
     public bool Alive = true;
     public float attackCounter = 0;
     public float healCounter = 0;
@@ -484,14 +484,19 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         if (DespairPoint >= 2)
         {
+            
             Meanie.TakeDamage(Meanie.Hp, true);
             StartCoroutine(BuffATKMeanie(2, 30));
             StartCoroutine(BuffDEFMeanie(2, 30));
             StartCoroutine(BuffSPDMeanie(2, 30));
+            
+            
             Reddie.TakeDamage(Reddie.Hp, true);
             StartCoroutine(BuffATKReddie(2, 30));
             StartCoroutine(BuffDEFReddie(2, 30));
             StartCoroutine(BuffSPDReddie(2, 30));
+            
+            
             Snake.TakeDamage((Snake.Hp + Snake.phantomHp), true);
             StartCoroutine(BuffATKSnake(2, 30));
             StartCoroutine(BuffDEFSnake(2, 30));
@@ -519,10 +524,11 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             Boss.TakeDamage(damage, true);
             attackCounter += damage;
             StartCoroutine(hellFireToBoss(2));
-            Meanie.TakeDamage(Meanie.Hp, true);
-            Reddie.TakeDamage(Reddie.Hp, true);
-            Snake.TakeDamage((Snake.Hp + Snake.phantomHp), true);
-
+            Meanie.TakeDamage(damage, true);
+            Reddie.TakeDamage(damage, true);
+            Snake.TakeDamage(damage, true);
+            TakeDamage(damage, true);
+            
             DespairPoint = 0;
 
             isattacking = false;

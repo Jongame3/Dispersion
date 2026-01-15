@@ -13,7 +13,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
     public int phantomHp = 0;
     public int Speed = 70;
     public int AttackPower = 70;
-    public uint revivePoint = 0;
+    public int revivePoint = 0;
     public int SkillPoint = 0;
     public int MaxSkillPoint = 10;
     public float Defense = 40;
@@ -89,7 +89,7 @@ public class CharPoison : MonoBehaviour, IBaseActions
             Hp -= effdamage;
         }
 
-        if (Hp <= 0 && revivePoint > 0)
+        if (Hp <= 0 && revivePoint >= 1)
         {
             Hp = maxHp / 2;
             revivePoint--;

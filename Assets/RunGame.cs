@@ -41,11 +41,15 @@ public class RunGame : MonoBehaviour
     {
         while (Boss.alive && RoundCount <= 30)
         {
-            if (!jirai.Alive || !yad.Alive || !fireg.Alive || !fox.Alive)
+            if ((!jirai.Alive && jirai.revivePoint == 0) ||
+                (!yad.Alive && yad.revivePoint == 0) ||
+                (!fireg.Alive && fireg.revivePoint == 0) ||
+                (!fox.Alive && fox.revivePoint == 0))
             {
                 EndGameDefeat();
                 yield break;
             }
+
 
             RoundText.text = "Раунд: " + RoundCount.ToString() + " / 30";
 
@@ -122,7 +126,6 @@ public class RunGame : MonoBehaviour
 
                     fireg.BattleHud.SetActive(false);
                     actionqueue.Dequeue();
-
                     continue;
                 }
 
@@ -139,6 +142,7 @@ public class RunGame : MonoBehaviour
 
                     yad.BattleHud.SetActive(false);
                     actionqueue.Dequeue();
+
                     continue;
                 }
             }
