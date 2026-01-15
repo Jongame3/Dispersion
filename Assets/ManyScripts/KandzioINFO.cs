@@ -13,7 +13,7 @@ public class KandzioINFO : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (this.isActiveAndEnabled)
         {
             Textwindow.SetActive(true);
-            Text.text = "Œ«: " + fireg.Hp.ToString() + "/" + fireg.maxHp.ToString() + "\r\nŒ”: " + fireg.SkillPoint.ToString() + "/" + fireg.MaxSkillPoint.ToString();
+            Text.text = "–û–ó: " + fireg.Hp.ToString() + "/" + fireg.maxHp.ToString() + "\r\n–û–£: " + fireg.SkillPoint.ToString() + "/" + fireg.MaxSkillPoint.ToString();
         }
     }
 

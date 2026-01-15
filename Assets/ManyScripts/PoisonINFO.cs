@@ -12,7 +12,7 @@ public class PoisonINfO : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (this.isActiveAndEnabled)
         {
             Textwindow.SetActive(true);
-            Text.text = "Œ«: " + (yad.Hp + yad.phantomHp).ToString() + "/" + yad.maxHp.ToString() + "\r\nŒ”: " + yad.SkillPoint.ToString() + "/" + yad.MaxSkillPoint.ToString(); 
+            Text.text = "–û–ó: " + (yad.Hp + yad.phantomHp).ToString() + "/" + yad.maxHp.ToString() + "\r\n–û–£: " + yad.SkillPoint.ToString() + "/" + yad.MaxSkillPoint.ToString();
         }
     }
 

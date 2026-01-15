@@ -26,7 +26,7 @@ public class RunGame : MonoBehaviour
 
     void EndGameDefeat()
     {
-        Debug.Log("Someone died! Game Over.");
+        Debug.Log("РљС‚Рѕ-С‚Рѕ СѓРјРµСЂ! РРіСЂР° РѕРєРѕРЅС‡РµРЅР°.");
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -44,22 +44,25 @@ public class RunGame : MonoBehaviour
             if (!jirai.Alive || !yad.Alive || !fireg.Alive || !fox.Alive)
             {
                 EndGameDefeat();
-                yield break; 
-                
+                yield break;
             }
 
-            RoundText.text = "Раунд: " + RoundCount.ToString() + " / 30";
+            RoundText.text = "Р Р°СѓРЅРґ: " + RoundCount.ToString() + " / 30";
 
             for (int i = 0; i < 4; i++)
             {
+
+                if (actionqueue.Count == 0) CreateQueue();
+
                 if (actionqueue.Peek() == "TSUMATSU" && jirai.Alive && Boss.alive)
                 {
-                    if (jirai.DespairMode == false) {
+                    if (!jirai.DespairMode)
+                    {
                         jirai.BattleHud.SetActive(true);
 
-                        jirai.SPText.text = "ОУ:" + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString();
-                        jirai.HPtext.text = "ОЗ:" + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString();
-                        jirai.DPText.text = "ОО:" + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
+                        jirai.SPText.text = "РћРЈ: " + jirai.SkillPoint + "/" + jirai.MaxSkillPoint;
+                        jirai.HPtext.text = "РћР—: " + jirai.Hp + "/" + jirai.maxHp;
+                        jirai.DPText.text = "РћРћ: " + jirai.DespairPoint + "/" + jirai.maxDespairPoint;
 
                         jirai.isattacking = true;
 
@@ -67,7 +70,7 @@ public class RunGame : MonoBehaviour
 
                         jirai.BattleHud.SetActive(false);
                         jirai.HealUI.SetActive(false);
-                        jirai.BTFUI.SetActive(false); 
+                        jirai.BTFUI.SetActive(false);
                         jirai.DelusionUI.SetActive(false);
                         actionqueue.Dequeue();
                     }
@@ -77,10 +80,9 @@ public class RunGame : MonoBehaviour
 
                         jirai.isattacking = true;
 
-                        jirai.SPText2.text = "ОУ:" + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString();
-                        jirai.HPtext2.text = "ОЗ:" + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString();
-                        jirai.DPText2.text = "ОО:" + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
-
+                        jirai.SPText2.text = "РћРЈ: " + jirai.SkillPoint + "/" + jirai.MaxSkillPoint;
+                        jirai.HPtext2.text = "РћР—: " + jirai.Hp + "/" + jirai.maxHp;
+                        jirai.DPText2.text = "РћРћ: " + jirai.DespairPoint + "/" + jirai.maxDespairPoint;
 
                         yield return new WaitUntil(() => jirai.isattacking == false);
 
@@ -88,7 +90,7 @@ public class RunGame : MonoBehaviour
                         actionqueue.Dequeue();
                     }
                     continue;
-                } 
+                }
 
                 if (actionqueue.Peek() == "FOX" && fox.Alive && Boss.alive)
                 {
@@ -96,8 +98,8 @@ public class RunGame : MonoBehaviour
 
                     fox.isattacking = true;
 
-                    fox.SpText.text = "ОУ:" + fox.SkillPoint.ToString() + "/" + fox.MaxSkillPoint.ToString();
-                    fox.HPtext.text = "ОЗ:" + fox.Hp.ToString() + "/" + fox.maxHp.ToString();
+                    fox.SpText.text = "РћРЈ: " + fox.SkillPoint + "/" + fox.MaxSkillPoint;
+                    fox.HPtext.text = "РћР—: " + fox.Hp + "/" + fox.maxHp;
 
                     yield return new WaitUntil(() => fox.isattacking == false);
 
@@ -106,8 +108,6 @@ public class RunGame : MonoBehaviour
 
                     continue;
                 }
-                
-
 
                 if (actionqueue.Peek() == "KANDZIO" && fireg.Alive && Boss.alive)
                 {
@@ -115,8 +115,8 @@ public class RunGame : MonoBehaviour
 
                     fireg.isattacking = true;
 
-                    fireg.SpText.text = "ОУ:" + fireg.SkillPoint.ToString() + "/" + fireg.MaxSkillPoint.ToString();
-                    fireg.HPtext.text = "ОЗ:" + fireg.Hp.ToString() + "/" + fireg.maxHp.ToString();
+                    fireg.SpText.text = "РћРЈ: " + fireg.SkillPoint + "/" + fireg.MaxSkillPoint;
+                    fireg.HPtext.text = "РћР—: " + fireg.Hp + "/" + fireg.maxHp;
 
                     yield return new WaitUntil(() => fireg.isattacking == false);
 
@@ -125,8 +125,6 @@ public class RunGame : MonoBehaviour
 
                     continue;
                 }
-                
-
 
                 if (actionqueue.Peek() == "POISON" && yad.Alive && Boss.alive)
                 {
@@ -134,18 +132,15 @@ public class RunGame : MonoBehaviour
 
                     yad.isattacking = true;
 
-                    yad.SpText.text = "ОУ:" + yad.SkillPoint.ToString() + "/" + yad.MaxSkillPoint.ToString();
-                    yad.HPtext.text = "ОЗ:" + (yad.Hp + yad.phantomHp).ToString() + "/" + yad.maxHp.ToString();
+                    yad.SpText.text = "РћРЈ: " + yad.SkillPoint + "/" + yad.MaxSkillPoint;
+                    yad.HPtext.text = "РћР—: " + (yad.Hp + yad.phantomHp) + "/" + yad.maxHp;
 
                     yield return new WaitUntil(() => yad.isattacking == false);
 
                     yad.BattleHud.SetActive(false);
                     actionqueue.Dequeue();
                     continue;
-
                 }
-                
-
             }
 
             Boss.Attack();
@@ -156,47 +151,29 @@ public class RunGame : MonoBehaviour
         }
 
         EndScreen.SetActive(true);
-        FoxEND.text = "Нанесено урона: " + fox.attackCounter.ToString()+ "\r\nУвернулась от " + fox.evadecount.ToString() + " атак";
-        JiraiEND.text = "Нанесено урона: " + jirai.attackCounter.ToString()+ "\r\nИсцелено здоровья: " + jirai.healCounter.ToString() ;
-        KandzioEND.text = "Нанесено урона: " + fireg.attackCounter.ToString()+ "\r\nПолучено урона: " + fireg.Vpitano.ToString();
-        PoisonEND.text = "Нанесено урона: " + yad.attackCounter.ToString();
+        FoxEND.text = "РќР°РЅРµСЃРµРЅРѕ СѓСЂРѕРЅР°: " + fox.attackCounter + "\r\nРЈРІРµСЂРЅСѓР»Р°СЃСЊ РѕС‚ " + fox.evadecount + " Р°С‚Р°Рє";
+        JiraiEND.text = "РќР°РЅРµСЃРµРЅРѕ СѓСЂРѕРЅР°: " + jirai.attackCounter + "\r\nРСЃС†РµР»РµРЅРѕ Р·РґРѕСЂРѕРІСЊСЏ: " + jirai.healCounter;
+        KandzioEND.text = "РќР°РЅРµСЃРµРЅРѕ СѓСЂРѕРЅР°: " + fireg.attackCounter + "\r\nРџРѕР»СѓС‡РµРЅРѕ СѓСЂРѕРЅР°: " + fireg.Vpitano;
+        PoisonEND.text = "РќР°РЅРµСЃРµРЅРѕ СѓСЂРѕРЅР°: " + yad.attackCounter;
     }
 
     Queue<string> CreateQueue()
     {
+        List<(string name, int speed)> candidates = new List<(string, int)>();
 
-        for (int i = 0; i < 4; i++)
+        if (fox.Alive) candidates.Add(("FOX", fox.Speed));
+        if (fireg.Alive) candidates.Add(("KANDZIO", fireg.Speed));
+        if (jirai.Alive) candidates.Add(("TSUMATSU", jirai.Speed));
+        if (yad.Alive) candidates.Add(("POISON", yad.Speed));
+
+        candidates.Sort((a, b) => b.speed.CompareTo(a.speed));
+
+        actionqueue.Clear();
+        foreach (var c in candidates)
         {
-            int maxSpeed = -1;
-            string maxName = "k";
-            ;
-
-            if (fox.Alive && maxSpeed < fox.Speed && !actionqueue.Contains("FOX"))
-            {
-                maxSpeed = fox.Speed;
-                maxName = "FOX";
-            }
-
-            if (fireg.Alive && maxSpeed < fireg.Speed && !actionqueue.Contains("KANDZIO"))
-            {
-                maxSpeed = fireg.Speed;
-                maxName = "KANDZIO";
-            }
-
-            if (jirai.Alive && maxSpeed < jirai.Speed && !actionqueue.Contains("TSUMATSU"))
-            {
-                maxSpeed = jirai.Speed;
-                maxName = "TSUMATSU";
-            }
-
-            if (yad.Alive && maxSpeed < yad.Speed && !actionqueue.Contains("POISON"))
-            {
-                maxSpeed = yad.Speed;
-                maxName = "POISON";
-            }
-
-            actionqueue.Enqueue(maxName);
+            actionqueue.Enqueue(c.name);
         }
+
         return actionqueue;
     }
 
@@ -207,7 +184,4 @@ public class RunGame : MonoBehaviour
         Boss.Hpslide.value = Boss.Hp;
         StartCoroutine(AttackFlow());
     }
-
-
-
 }

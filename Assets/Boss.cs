@@ -29,18 +29,18 @@ public class Boss : MonoBehaviour, IBaseActions
 
     public void Attack()
     {
-        if (agr) {
+        if (agr && fireg.agrCounter > 0) {
             if (fireg.parryBool)
-            {
-                TakeDamage(AttackPower * 4, true);
-                fireg.attackCounter += AttackPower * 4;
-                fireg.parryBool = false;
-            }
+                {
+                    TakeDamage(AttackPower * 4, true);
+                    fireg.attackCounter += AttackPower * 4;
+                    fireg.parryBool = false;
+                }
             else
-            {
-                fireg.TakeDamage(AttackPower * 4, false);
-            }
-
+                {
+                    fireg.TakeDamage(AttackPower * 4, false);
+                }
+            fireg.agrCounter--;
             isattacking = false;
         }
         else

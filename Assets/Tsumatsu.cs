@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -223,7 +223,6 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
         {
             Hp = maxHp / 2;
             revivePoint--;
-            Alive = true;
         }
         else if (Hp <= 0 && revivePoint == 0)
         {
@@ -335,7 +334,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
         yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
-        Meanie.Speed = 30;
+        Meanie.Speed = 80;
     }
     private IEnumerator BuffSPDReddie(uint rounds, int amount)
     {
@@ -355,7 +354,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
         yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
-        Snake.Speed = 0;
+        Snake.Speed = 70;
     }
 
     public void Comedy()
@@ -493,7 +492,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
             StartCoroutine(BuffATKReddie(2, 30));
             StartCoroutine(BuffDEFReddie(2, 30));
             StartCoroutine(BuffSPDReddie(2, 30));
-            Snake.TakeDamage(Snake.Hp, true);
+            Snake.TakeDamage((Snake.Hp + Snake.phantomHp), true);
             StartCoroutine(BuffATKSnake(2, 30));
             StartCoroutine(BuffDEFSnake(2, 30));
             StartCoroutine(BuffSPDSnake(2, 30));
@@ -513,15 +512,16 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
     {
         if (DespairPoint >= 1)
         {
-            int damage = ((Meanie.AttackPower + Reddie.AttackPower + Snake.AttackPower) * DespairPoint); // Dividing is under a queastion....
+            int damage = ((Meanie.AttackPower + Reddie.AttackPower + Snake.AttackPower) * DespairPoint); 
 
             TakeDamage(Hp, true);
+
             Boss.TakeDamage(damage, true);
             attackCounter += damage;
             StartCoroutine(hellFireToBoss(2));
             Meanie.TakeDamage(Meanie.Hp, true);
             Reddie.TakeDamage(Reddie.Hp, true);
-            Snake.TakeDamage(Snake.Hp, true);
+            Snake.TakeDamage((Snake.Hp + Snake.phantomHp), true);
 
             DespairPoint = 0;
 

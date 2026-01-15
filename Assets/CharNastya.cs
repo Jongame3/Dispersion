@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -19,6 +19,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
     public TextMeshProUGUI Text;
     public int attackCounter = 0;
     public int Vpitano = 0;
+    public int agrCounter = 0;
 
     public uint revivePoint = 0;
 
@@ -116,6 +117,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
                 Boss.agr = true;
             }
             SkillPoint--;
+            agrCounter += 3;
 
             isattacking = false;
         }

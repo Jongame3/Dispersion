@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -125,14 +125,14 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
             float percentDefence = 1 - (Boss.Defense / 100);
             attackCounter += (int)(AttackPower * percentDefence);
-            if (Hp < maxHp-10)
+
+            int healAmount = 10;
+            if (Hp + healAmount > maxHp)
             {
-                Hp += 10; 
+                healAmount = maxHp - Hp;
             }
-            else
-            {
-                Hp = maxHp;
-            }
+            Hp += healAmount;
+
             FoxFrame.myAnimator.SetTrigger("heal");
             SkillPoint -= 1;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -93,7 +93,6 @@ public class CharPoison : MonoBehaviour, IBaseActions
         {
             Hp = maxHp / 2;
             revivePoint--;
-            Alive = true;
         }
         else if (Hp <= 0 && revivePoint == 0)
         {

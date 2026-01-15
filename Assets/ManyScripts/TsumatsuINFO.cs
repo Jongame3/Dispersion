@@ -12,15 +12,15 @@ public class TsumatsuINFO : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (this.isActiveAndEnabled)
         {
             Textwindow1.SetActive(true);
-            Text1.text = "Œ«: " + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString() +
-                "\r\nŒ”: " + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString() +
-                "\r\nŒŒ: " + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
+            Text1.text = "–û–ó: " + jirai.Hp.ToString() + "/" + jirai.maxHp.ToString() +
+                "\r\n–û–£: " + jirai.SkillPoint.ToString() + "/" + jirai.MaxSkillPoint.ToString() +
+                "\r\n–û–û: " + jirai.DespairPoint.ToString() + "/" + jirai.maxDespairPoint.ToString();
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        
+
         if (this.isActiveAndEnabled)
         {
             Textwindow1.SetActive(false);

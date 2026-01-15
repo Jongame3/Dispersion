@@ -12,7 +12,9 @@ public class FoxINFO : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (this.isActiveAndEnabled)
         {
             Textwindow.SetActive(true);
-            Text.text = "Œ«: " + fox.Hp.ToString() + "/" + fox.maxHp.ToString() + "\r\nŒ”: " + fox.SkillPoint.ToString() + "/" + fox.MaxSkillPoint.ToString();
+            Text.text =
+                "–û–ó: " + fox.Hp + "/" + fox.maxHp + "\r\n" +
+                "–û–£: " + fox.SkillPoint + "/" + fox.MaxSkillPoint;
         }
     }
 
@@ -23,6 +25,5 @@ public class FoxINFO : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             Textwindow.SetActive(false);
             Text.text = ":)";
         }
-
     }
 }
