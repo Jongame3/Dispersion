@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
-using UnityEditor.Analytics;
+
 using TMPro;
-using Unity.VisualScripting;
+
 
 public class RunGame : MonoBehaviour
 {
@@ -17,8 +17,8 @@ public class RunGame : MonoBehaviour
     [SerializeField] private Boss Boss;
     [SerializeField] private TextMeshProUGUI RoundText;
 
-    [SerializeField] private GameObject EndScreen;
-
+    [SerializeField] private GameObject WinScreen;
+    [SerializeField] private GameObject LoseScreen;
     [SerializeField] private TextMeshProUGUI FoxEND;
     [SerializeField] private TextMeshProUGUI JiraiEND;
     [SerializeField] private TextMeshProUGUI KandzioEND;
@@ -26,13 +26,7 @@ public class RunGame : MonoBehaviour
 
     void EndGameDefeat()
     {
-        Debug.Log("Кто-то умер! Игра окончена.");
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        LoseScreen.SetActive(true);
     }
 
     Queue<string> actionqueue = new Queue<string>();
@@ -154,7 +148,7 @@ public class RunGame : MonoBehaviour
             CreateQueue();
         }
 
-        EndScreen.SetActive(true);
+        WinScreen.SetActive(true);
         FoxEND.text = "Нанесено урона: " + fox.attackCounter + "\r\nУвернулась от " + fox.evadecount + " атак";
         JiraiEND.text = "Нанесено урона: " + jirai.attackCounter + "\r\nИсцелено здоровья: " + jirai.healCounter;
         KandzioEND.text = "Нанесено урона: " + fireg.attackCounter + "\r\nПолучено урона: " + fireg.Vpitano;
