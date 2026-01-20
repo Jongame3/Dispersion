@@ -18,22 +18,22 @@ public class BossINFO : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             if (Boss.agr == true && Boss.disorientation == false)
             {
-                Text.text = "Агр : Да \r\nДизориентация: Нет";
+                Text.text = "РђРіСЂ : Р”Р° \r\nР”РёР·РѕСЂРёРµРЅС‚Р°С†РёСЏ: РќРµС‚";
             }
 
             if (Boss.agr == true && Boss.disorientation == true)
             {
-                Text.text = "Агр : Да \r\nДизориентация: Да ";
+                Text.text = "РђРіСЂ : Р”Р° \r\nР”РёР·РѕСЂРёРµРЅС‚Р°С†РёСЏ: Р”Р° ";
             }
 
             if (Boss.agr == false && Boss.disorientation == true)
             {
-                Text.text = "Агр : Нет \r\nДизориентация: Да";
+                Text.text = "РђРіСЂ : РќРµС‚ \r\nР”РёР·РѕСЂРёРµРЅС‚Р°С†РёСЏ: Р”Р°";
             }
 
             if (Boss.agr == false && Boss.disorientation == false)
             {
-                Text.text = "Агр : Нет \r\nДизориентация: Нет";
+                Text.text = "РђРіСЂ : РќРµС‚ \r\nР”РёР·РѕСЂРёРµРЅС‚Р°С†РёСЏ: РќРµС‚";
             }
         }
     }
