@@ -165,14 +165,16 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
     {
         if (SkillPoint >= 3)
         {
-            float modifier = 1 + (1*(Speed/100));
+            float speedf = Speed;
+
+            float modifier = 3 + (5*(speedf/100));
 
             Boss.TakeDamage((int)(AttackPower * modifier), false);
             float percentDefence = 1 - (Boss.Defense / 100);
 
             attackCounter += (int)(((int)(AttackPower * modifier)) * percentDefence);
 
-            modifier = (float) (1.5 + (1.5 * (Speed / 100)));
+            modifier = (float) (3.5 + (7.5 * (speedf / 100)));
 
             Boss.TakeDamage((int)(AttackPower * modifier), false);
             attackCounter += (int)(((int)(AttackPower * modifier)) * percentDefence);
@@ -192,7 +194,7 @@ public class CharKsiusha : MonoBehaviour, IBaseActions
 
         if (SkillPoint >= 4)
         {
-            float modifier = 6;
+            float modifier = 15;
             Boss.TakeDamage((int)(AttackPower * modifier), true);
 
             attackCounter += ((int)(AttackPower * modifier));
