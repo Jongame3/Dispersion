@@ -303,7 +303,7 @@ public class Tsumatsu : MonoBehaviour, IBaseActions
 
         yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
-        Reddie.Defense = 40;
+        Reddie.Defense = 30;
     }
     private IEnumerator BuffDEFSnake(uint rounds, int amount)
     {

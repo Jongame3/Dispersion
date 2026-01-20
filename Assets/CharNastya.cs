@@ -55,11 +55,13 @@ public class CharNastya : MonoBehaviour, IBaseActions
     public void TakeDamage(int damage, bool ignore)
     {
 
-        if (!parryBool) { 
-        
+        if (!parryBool) {
+            if (Defense > 100) return;
+
             float percentDefence = 1 - (Defense / 100);
 
             if (ignore) percentDefence = 1;
+            
 
             int effdamage = (int)(damage * percentDefence);
             NastyaFrame.myAnimator.SetTrigger("take_damage");
@@ -110,7 +112,7 @@ public class CharNastya : MonoBehaviour, IBaseActions
             if (Boss.disorientation)
             {
                 Boss.agr = true;
-                StartCoroutine(BuffDEF(3, 20));
+                StartCoroutine(BuffDEF2(3, 20));
             }
             else
             {
@@ -188,6 +190,18 @@ public class CharNastya : MonoBehaviour, IBaseActions
         yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
 
         Defense = 40;
+    }
+
+    private IEnumerator BuffDEF2(uint rounds, int amount)
+    {
+        int startdef = (int)Defense;
+        uint buffStart = GameData.RoundCount;
+
+        Defense += amount;
+
+        yield return new WaitUntil(() => (rounds + buffStart + 1 == GameData.RoundCount));
+
+        Defense = startdef;
     }
 
     private IEnumerator disorientBuff(uint rounds)
