@@ -23,6 +23,7 @@ public class RunGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI JiraiEND;
     [SerializeField] private TextMeshProUGUI KandzioEND;
     [SerializeField] private TextMeshProUGUI PoisonEND;
+    [SerializeField] private TextMeshProUGUI RoundsEND;
 
     void EndGameDefeat()
     {
@@ -153,6 +154,8 @@ public class RunGame : MonoBehaviour
         JiraiEND.text = "Нанесено урона: " + jirai.attackCounter + "\r\nИсцелено здоровья: " + jirai.healCounter;
         KandzioEND.text = "Нанесено урона: " + fireg.attackCounter + "\r\nПолучено урона: " + fireg.Vpitano;
         PoisonEND.text = "Нанесено урона: " + yad.attackCounter;
+        RoundsEND.text = "Раундов прошло: " + RoundCount.ToString() + " / 30";
+
     }
 
     Queue<string> CreateQueue()
