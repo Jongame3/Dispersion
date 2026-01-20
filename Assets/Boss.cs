@@ -39,8 +39,8 @@ public class Boss : MonoBehaviour, IBaseActions
             else
                 {
                     fireg.TakeDamage(AttackPower * 4, false);
+                    fireg.agrCounter--;
                 }
-            fireg.agrCounter--;
             isattacking = false;
         }
         else
@@ -51,7 +51,8 @@ public class Boss : MonoBehaviour, IBaseActions
                 fireg.attackCounter += AttackPower * 4;
                 fireg.parryBool = false;
 
-            } else { 
+            } else {
+                agr = false;
                 fox.TakeDamage(10, false);
                 yad.TakeDamage(10, false);
                 fireg.TakeDamage(10, false);

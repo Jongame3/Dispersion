@@ -3398,6 +3398,7 @@ GameObject:
   - component: {fileID: 547707258}
   - component: {fileID: 547707260}
   - component: {fileID: 547707259}
+  - component: {fileID: 547707261}
   m_Layer: 5
   m_Name: CharInfo
   m_TagString: Untagged
@@ -3463,6 +3464,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547707257}
   m_CullTransparentMesh: 1
+--- !u!114 &547707261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547707257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa1df0ce9c1388419749d7e05113a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossINFO
+  Textwindow: {fileID: 547707257}
+  Text: {fileID: 990886524}
+  Boss: {fileID: 1165730502}
 --- !u!1 &569715997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8929,6 +8945,7 @@ GameObject:
   - component: {fileID: 1945262972}
   - component: {fileID: 1945262974}
   - component: {fileID: 1945262975}
+  - component: {fileID: 1945262976}
   m_Layer: 5
   m_Name: BossFrame
   m_TagString: Untagged
@@ -9028,6 +9045,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   myAnimator: {fileID: 0}
+--- !u!114 &1945262976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945262970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa1df0ce9c1388419749d7e05113a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossINFO
+  Textwindow: {fileID: 547707257}
+  Text: {fileID: 990886524}
+  Boss: {fileID: 1165730502}
 --- !u!1 &1953503818
 GameObject:
   m_ObjectHideFlags: 0
